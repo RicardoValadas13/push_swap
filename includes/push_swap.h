@@ -5,11 +5,14 @@
 #include <unistd.h>
 #include <stdlib.h>
 
-typedef struct s_lst
+typedef struct node
 {
+  struct node *prev;
   int nbr;
-  void              *content;
-  struct s_lst  *next;
-}                    t_lista;
+  struct node *next;
+};
 
-int main(int ac, char **av);
+int main(int ac, char **av)
+{
+
+}
