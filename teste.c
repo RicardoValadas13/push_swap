@@ -108,18 +108,25 @@ void    push_x(t_lst *push, t_lst *rec)
         else
         {
                 rec->content = push->content;
-                push = push->next;
+                while (push->next != NULL)
+                {
+                        push->content = push->next->content;
+                        push->next->content = 0;
+                        push = push->next;
+                }
         }
 }
 
 int	main(int ac, char **av)
 {
 	int i;
-	t_lst *lista;
-	t_lst *node;
+	t_lst *stackA;
+    t_lst *stackB;
+	t_lst *nodeA;
 	int num;
 
-	lista = NULL;
+	stackA = NULL;
+    stackB = NULL;
 	i = 1;
 	if (ac < 2)
 		return (printf("%s", "Try again"));
@@ -128,16 +135,18 @@ int	main(int ac, char **av)
 		while (av[i])
 		{
 			num = ft_atoi(av[i]);
-			node = first_in_stack(num);
-			add_to_stack(&lista, node);
+			nodeA = first_in_stack(num);
+			add_to_stack(&stackA, nodeA);
 			i++;
 		}
 	}
-	printf("Tamanho da lista: %d\n", ft_lstsize(lista));
-        swap_x(lista, lista, 2);
-	while (lista != NULL)
+	printf("Tamanho da lista: %d\n", ft_lstsize(stackA));
+    push_x(stackA, stackB);
+    printf("%s", "---STACK A------STACK B----\n");
+    while (stackA != NULL && stackB != NULL)
 	{
-		printf("%d\n", lista->content);
-		lista = lista->next;
-	}
+		printf("     %d     |      %d     \n", stackA->content, stackB->content);
+		stackA = stackA->next;
+                stackB = stackB->next;
+	} 
 }
