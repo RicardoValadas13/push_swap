@@ -59,6 +59,7 @@ void	add_to_stack(t_lst **lst, t_lst *new)
 	{
 		while (current->next != NULL)
 			current = current->next;
+			
 		current->next = new;
 		new->prev = current;
 	}
@@ -86,47 +87,51 @@ void	swap_x(t_lst *A, t_lst *B, int check)
 	if (ft_lstsize(A) < 2)
 		return ;
 	if (check == 1 || (check == 2) + 1)
-        {
-                temp = A->content;
-                A->content = A->next->content;
-                A->next->content = temp;
-                if (check == 1)
-                        check = 0;
-                else
-                {
-                        temp = B->content;
-                        B->content = B->next->content;
-                        B->next->content = temp;
-                }
-        }
+	{
+		temp = A->content;
+		A->content = A->next->content;
+		A->next->content = temp;
+		if (check == 1)
+			check = 0;
+		else
+		{
+			temp = B->content;
+			B->content = B->next->content;
+			B->next->content = temp;
+		}
+	}
 }
 
-void    push_x(t_lst *push, t_lst *rec)
+void	deletenode(t_lst *node)
 {
-        if (!ft_lstsize(push))
-                return ;
-        else
-        {
-                rec->content = push->content;
-                while (push->next != NULL)
-                {
-                        push->content = push->next->content;
-                        push->next->content = 0;
-                        push = push->next;
-                }
-        }
+	node->prev = NULL;
+	node->next = NULL;
+}
+
+void	push_x(t_lst **push, t_lst **rec)
+{
+	t_lst	*aux = (*push)->next;
+
+	if (!ft_lstsize(*push))
+		return ;
+		
+	
+	deletenode(*push);
+	add_to_stack(rec, *push);
+	push = &aux;
+	(*push)->prev = NULL;
 }
 
 int	main(int ac, char **av)
 {
 	int i;
 	t_lst *stackA;
-    t_lst *stackB;
+	t_lst *stackB;
 	t_lst *nodeA;
 	int num;
 
 	stackA = NULL;
-    stackB = NULL;
+	stackB = NULL;
 	i = 1;
 	if (ac < 2)
 		return (printf("%s", "Try again"));
@@ -141,12 +146,11 @@ int	main(int ac, char **av)
 		}
 	}
 	printf("Tamanho da lista: %d\n", ft_lstsize(stackA));
-    push_x(stackA, stackB);
-    printf("%s", "---STACK A------STACK B----\n");
-    while (stackA != NULL && stackB != NULL)
+	push_x(&stackA, &stackB);
+	printf("%s", "---STACK A------STACK B----\n");
+	while (stackA != NULL)
 	{
 		printf("     %d     |      %d     \n", stackA->content, stackB->content);
 		stackA = stackA->next;
-                stackB = stackB->next;
-	} 
+	}
 }
