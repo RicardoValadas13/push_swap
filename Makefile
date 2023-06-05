@@ -1,32 +1,27 @@
-NAME = push_swap.a
+NAME = push_swap
 
-CFLAGS = -Wall -Werror -Wextra
+SRCS =	$(wildcard *.c)
 
-SRC = main.c
+OBJS :=$(SRCS:.c=.o)
 
-OBJ = $(SRC:.c=.o)
+CFLAGS = -Wall -Wextra -Werror
 
-OBJ_BONUS = $(SRC_BONUS:.c=.o)
-
-CFLAGS = -Wall -Werror -Wextra
-
-%.o : %.c
-	cc $(CFLAGS) -c $< -o $@
+.PHONY: all tester clean fclean re
 
 all: $(NAME)
 
-bonus: $(OBJ_BONUS)
-	ar -crs $(NAME) $(OBJ_BONUS)
+%.o: %.c
+	gcc $(CFLAGS) -c $< -o $@
 
-$(NAME) : $(OBJ)
-	ar -crs $@ $^
+$(NAME): $(OBJS)
+	ar rc $(NAME) $(OBJS)
+	ranlib $(NAME)
 
+tester: $(SRCS)
+	cc $(CFLAGS) $(SRCS)
+	./a.out
 clean:
-	rm -f $(OBJ) 
+	rm -f $(OBJS)
 
 fclean: clean
 	rm -f $(NAME)
-
-re: fclean all
-
-.PHONY: all clean fclean re bonus
