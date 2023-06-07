@@ -1,4 +1,4 @@
-#include "./inc/push_swap.h"
+#include "../inc/push_swap.h"
 void	swap_x(t_lst **stack)
 {
 	t_lst	*top;
@@ -6,15 +6,16 @@ void	swap_x(t_lst **stack)
 	if (ft_lstsize(*stack) < 2)
 		return ;
 	top = *stack;
-	*stack = (*stack)->next;
-	del_node(&(*stack)->prev);
+	*stack = top->next;
+	(*stack)->prev = NULL;
 	top->prev = *stack;
 	if ((*stack)->next != NULL)
 	{
 		top->next = (*stack)->next;
 		(*stack)->next->prev = top;
 	}
-	(*stack)->prev = NULL;
+	else
+		top->next = NULL;
 	(*stack)->next = top;
 }
 

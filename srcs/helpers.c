@@ -1,4 +1,4 @@
-#include "./inc/push_swap.h"
+#include "../inc/push_swap.h"
 int	ft_atoi(char const *nptr)
 {
 	int	signal;
@@ -24,4 +24,18 @@ int	ft_atoi(char const *nptr)
 		i++;
 	}
 	return (nbr * signal);
+}
+
+int	check_order(t_lst **head)
+{	
+	t_lst *stack;
+
+	stack = *head;
+	while (stack->next !=NULL && stack != NULL)
+	{
+		if (stack->content > stack->next->content)
+			return(0); 
+		stack = stack->next;
+	}
+	return(1);
 }

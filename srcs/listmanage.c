@@ -1,4 +1,4 @@
-#include "./inc/push_swap.h"
+#include "../inc/push_swap.h"
 t_lst	*first_in_stack(int nbr)
 {
 	t_lst	*node;
