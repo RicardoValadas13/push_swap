@@ -33,11 +33,11 @@
 		sort(&stackA);
 		printresults(stackA, stackB);
 		printf(GREEN "Now it is with this moves: \n" RESET);
-		print_values();
+		//print_values();
 	}
 }
 
-void print_values(int count, ...) {
+/* void print_values(int count, ...) {
     va_list args;
     va_start(args, count);
 	int	value;
@@ -54,13 +54,9 @@ void print_values(int count, ...) {
         printf("Value %d: %d\n", i + 1, value);
 
     va_end(args);
-}
+} */
 
-int main() {
-    print_values(3, 10, 20, 30);
-    print_values(4, 1, 2, 3, 4);
-    return 0;
-}
+
 
 
 void	printresults(t_lst	*stackA, t_lst *stackB)
