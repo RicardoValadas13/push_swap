@@ -20,6 +20,11 @@ typedef struct s_lst
 	struct s_lst	*next;
 }					t_lst;
 
+typedef struct 
+{
+    int				total_count;
+} FunctionCounters;
+
 
 int main(int ac, char **av);
 int	ft_atoi(char const *nptr);
@@ -29,14 +34,21 @@ void	add_to_stack(t_lst **lst, t_lst *new);
 int	ft_lstsize(t_lst *lst);
 void	*last_lst(t_lst *lst);
 void	del_node(t_lst	**del);
-void	swap_x(t_lst **stack);
-void	rot_x(t_lst **stack);
-void	rev_rot_x(t_lst **stack);
-void	push_x(t_lst **push, t_lst **rec);
-void    dbl_rot_x(t_lst **stackA, t_lst **stackB);
-void    dbl_rev_rot_x(t_lst **stackA, t_lst **stackB);
-void    dbl_swap_x(t_lst **stackA, t_lst **stackB);
+void	sa(t_lst **stack, FunctionCounters *counter);
+void	sb(t_lst **stack, FunctionCounters *counter);
+void	ra(t_lst **stack, FunctionCounters *counter);
+void	rb(t_lst **stack, FunctionCounters *counter);
+void	rra(t_lst **stack, FunctionCounters *counter);
+void	rrb(t_lst **stack, FunctionCounters *counter);
+void	pa(t_lst **push, t_lst **rec, FunctionCounters *counter);
+void	pb(t_lst **push, t_lst **rec, FunctionCounters *counter);
+void    rr(t_lst **stackA, t_lst **stackB, FunctionCounters *counter);
+void    rrr(t_lst **stackA, t_lst **stackB, FunctionCounters *counter);
+void    ss(t_lst **stackA, t_lst **stackB, FunctionCounters *counter);
 void	printresults(t_lst	*stackA, t_lst *stackB);
-void    sort(t_lst **stackA);
-void    sort_small(t_lst **stackA);
+void    sort(t_lst **stackA, t_lst **stackB, FunctionCounters *counter);
+void    sort_three(t_lst **stackA, FunctionCounters *counter);
+int	descending(t_lst *stack);
+int ft_min(t_lst *stack);
+int ft_max(t_lst *stack);
 

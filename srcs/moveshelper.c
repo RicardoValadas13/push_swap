@@ -1,18 +1,21 @@
 #include "../inc/push_swap.h"
-void    dbl_rot_x(t_lst **stackA, t_lst **stackB)
+void    rr(t_lst **stackA, t_lst **stackB, FunctionCounters *counter)
 {
-    rot_x(stackA);
-    rot_x(stackB);
+    ra(stackA, counter);
+    rb(stackB, counter);
+    counter->total_count--;
 }
 
-void    dbl_rev_rot_x(t_lst **stackA, t_lst **stackB)
+void    rrr(t_lst **stackA, t_lst **stackB, FunctionCounters *counter)
 {
-    rev_rot_x(stackA);
-    rev_rot_x(stackB);
+    rra(stackA, counter);
+    rrb(stackB, counter);
+    counter->total_count--;
 }
 
-void    dbl_swap_x(t_lst **stackA, t_lst **stackB)
+void    ss(t_lst **stackA, t_lst **stackB, FunctionCounters *counter)
 {
-    swap_x(stackA);
-    swap_x(stackB);
+    sa(stackA, counter);
+    sb(stackB, counter);
+    counter->total_count--;
 }

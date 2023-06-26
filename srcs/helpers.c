@@ -39,3 +39,51 @@ int	check_order(t_lst **head)
 	}
 	return(1);
 }
+
+int	descending(t_lst *stack)
+{
+	int i;
+
+	i = stack->content;
+	while (stack)
+	{
+		if (i < stack->content)
+			return (0);
+		stack = stack->next;
+	}
+	return (1);
+}
+
+void	ft_count()
+{
+	static int counter = 0;
+	counter++;
+}
+
+int ft_min(t_lst *stack)
+{
+    int i;
+
+    i = stack->content;
+    while (stack)
+    {
+        if (stack->content < i)
+            i = stack->content;
+        stack = stack->next;
+    }
+    return (i);
+}
+
+int ft_max(t_lst *stack)
+{
+    int i;
+
+    i = stack->content;
+    while (stack)
+    {
+        if (stack->content > i)
+            i = stack->content;
+        stack = stack->next;
+    }
+    return (i);
+}
