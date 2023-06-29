@@ -18,19 +18,14 @@ build_library:
 all: $(NAME)
 
 $(NAME): $(OBJS) build_library
-	@cc $(CFLAGS) -I./srcs/ft_printf -L./srcs/ft_printf -I./srcs/libft -L./srcs/libft -fsanitize=address $(OBJS) -o $(NAME) -lftprintf -lft
-
-runner:
-	@cc -Wall -Werror -Wextra $(SRCS) build_library -o push_swap
-	@mv push_swap ./push_swap_visualizer-master/build
-	@cd ./push_swap_visualizer-master/build && ./bin/visualizer
+	@cc $(CFLAGS) -I./srcs/ft_printf -L./srcs/ft_printf -I./srcs/libft -L./srcs/libft $(OBJS) -o $(NAME) -lftprintf -lft
 
 tester: $(SRCS)
 	@cc $(CFLAGS) $(SRCS)
 
 clean_library:
-	@$(MAKE) -C ./srcs/ft_printf clean
-	@$(MAKE) -C ./srcs/libft clean
+	@$(MAKE) -C ./srcs/ft_printf fclean
+	@$(MAKE) -C ./srcs/libft fclean
 
 clean:
 	@rm -f $(OBJS)

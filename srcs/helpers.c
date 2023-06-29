@@ -63,30 +63,50 @@ void	ft_count()
 	counter++;
 }
 
-int ft_min(t_lst *stack)
+t_lst *ft_min(t_lst *stack)
 {
-    int i;
+    if (stack == NULL)
+        return NULL;
 
-    i = stack->content;
-    while (stack)
+    t_lst *minNode; 
+    int minValue;
+
+		minNode = stack;
+		minValue = stack->content;
+		while (stack)
     {
-        if (stack->content < i)
-            i = stack->content;
+        if (stack->content < minValue)
+        {
+            minValue = stack->content;
+            minNode = stack;
+        }
         stack = stack->next;
     }
-    return (i);
+
+    return (minNode);
 }
 
-int ft_max(t_lst *stack)
+t_lst *ft_max(t_lst *stack)
 {
-    int i;
+    if (stack == NULL)
+        return NULL;
 
-    i = stack->content;
-    while (stack)
+    t_lst *maxNode; 
+    int maxValue; 
+
+		maxNode = stack;
+		maxValue = stack->content;
+		while (stack)
     {
-        if (stack->content > i)
-            i = stack->content;
+        if (stack->content > maxValue)
+        {
+            maxValue = stack->content;
+            maxNode = stack;
+        }
         stack = stack->next;
     }
-    return (i);
+		ft_printf("%d\n", maxNode->content);
+    return (maxNode);
 }
+
+

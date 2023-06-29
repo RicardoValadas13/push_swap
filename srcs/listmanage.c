@@ -12,6 +12,11 @@ t_lst	*first_in_stack(int nbr)
 	node->prev = NULL;
 	node->content = nbr;
 	node->next = NULL;
+	if (node->content != nbr)
+	{
+		free(node);
+		return (NULL);
+	}
 	return (node);
 }
 

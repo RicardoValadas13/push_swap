@@ -49,6 +49,8 @@ void	printresults(t_lst	*stackA, t_lst *stackB);
 void    sort(t_lst **stackA, t_lst **stackB, FunctionCounters *counter);
 void    sort_three(t_lst **stackA, FunctionCounters *counter);
 int	descending(t_lst *stack);
-int ft_min(t_lst *stack);
-int ft_max(t_lst *stack);
+t_lst *ft_min(t_lst *stack);
+t_lst *ft_max(t_lst *stack);
+int moves_calc(t_lst *stack);
+
 
