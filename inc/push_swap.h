@@ -51,6 +51,7 @@ void    sort_three(t_lst **stackA, FunctionCounters *counter);
 int	descending(t_lst *stack);
 t_lst *ft_min(t_lst *stack);
 t_lst *ft_max(t_lst *stack);
-int moves_calc(t_lst *stack);
+int pushmove_calc(t_lst *stack, int size, int pos);
+int ft_pos(t_lst *stack, t_lst *find);
 
 

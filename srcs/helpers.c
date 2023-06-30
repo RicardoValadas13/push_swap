@@ -105,7 +105,6 @@ t_lst *ft_max(t_lst *stack)
         }
         stack = stack->next;
     }
-		ft_printf("%d\n", maxNode->content);
     return (maxNode);
 }
 

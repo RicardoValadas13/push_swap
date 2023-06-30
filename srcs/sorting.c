@@ -30,34 +30,70 @@ void    sort_three(t_lst **stackA, FunctionCounters *counter)
     }
 }
 
-int moves_calc(t_lst *stack)
+int ft_pos(t_lst *stack, t_lst *find)
 {
     int i;
 
     i = 0;
-    while (stack != NULL)
+    while(stack != NULL)
     {
-        ft_printf("STACK DATA : %d\n", stack->content);
-        stack = stack->prev;
+        if (stack->content == find->content)
+            return (i);
+        stack = stack->next;
         i++;
     }
-    //ft_printf("%d\n", stack->prev->content);
-    //ft_printf("%d\n", stack->content);
+    return (i);
+}
+
+//The purpose of this function is to count the moves necessary
+//to push a specific node to the other stack in its most efficent ways
+int pushmove_calc(t_lst *stack, int size, int pos)
+{
+    int i;
+    
+    //In this case when the value is located in the lower half and
+    //because of that i calculate the moves as if im doing the rotate move, and then
+    //one push..
+    if (pos < size / 2)
+    {
+        i = 0;
+        while (stack != NULL)
+        {
+            stack = stack->prev;
+            i++;
+        }
+    }
+    //In this case when the value is located on the upper half of the stack it
+    //is cheaper to do reverse rotate, so i calculate that number of moves, includind
+    //the push..
+    else if (pos >= size / 2)
+    {
+        i = 1;
+        while (stack != NULL)
+        {
+            stack = stack->next;
+            i++;
+        }
+    }
+    else
+        i = 0;
     return (i);
 }
 
 void    sort(t_lst **stackA, t_lst **stackB, FunctionCounters *counter)
 {
-    if (ft_lstsize(*stackA) > 3)
+    while (ft_lstsize(*stackA) > 3)
     {
-        (void)stackB;
-        //pa(stackA, stackB, counter);
-        ft_printf("moves : %d\n", moves_calc(ft_max((*stackA))));
+        pa(stackA, stackB, counter);
+        pa(stackA, stackB, counter);
+        if ((*stackA)->content > ft_max(*stackB)->content)
+            pa(stackA, stackB, counter);
+        else
+
+
+        pushmove_calc(ft_max((*stackA)), ft_lstsize(*stackA), ft_pos(*stackA, ft_max((*stackA))));
     }
-    else
-    {
-        sort_three(stackA, counter);
-    }
+    sort_three(stackA, counter);
     //first we push to values from the top of A to B
 
     
