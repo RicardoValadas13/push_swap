@@ -71,6 +71,7 @@ int pushmove_calc(t_lst *stack, int size, int pos)
         }
         else
         {
+            printf("here \n");
             temp = temp->next;
             i++;
         }
@@ -78,19 +79,49 @@ int pushmove_calc(t_lst *stack, int size, int pos)
     return (i);
 }
 
+t_lst   *ft_maxbelow(t_lst *stack, int nbr)
+{
+    t_lst *maxnbr;
+
+    maxnbr = stack;
+    while (stack != NULL)
+    {
+        if (stack->content < nbr)
+            maxnbr = stack;
+        stack = stack->next;
+    }
+    return (maxnbr);
+}
+
+int    optimal_tester(t_lst *stackA, t_lst *stackB)
+{
+    int moves;
+
+    moves = 0;
+        if (stackA->content > ft_max(stackB)->content || stackA->content < ft_min(stackB)->content)
+        {
+            moves += pushmove_calc(ft_max(stackB), ft_lstsize(stackB), ft_pos(stackB, ft_max(stackB)));
+        }
+        else
+        {
+            moves += pushmove_calc(ft_maxbelow(stackB, stackA->content), ft_lstsize(stackB), ft_pos(stackB, ft_maxbelow(stackB, stackA->content)));
+        }
+    return (moves);
+}
+
 void    sort(t_lst **stackA, t_lst **stackB, FunctionCounters *counter)
 {
-    /* while (ft_lstsize(*stackA) > 3)
-    { */
+        
+    
         pa(stackA, stackB, counter);
         pa(stackA, stackB, counter);
+        pa(stackA, stackB, counter);
+        pa(stackA, stackB, counter);
+
       
-        /* if ((*stackA)->content > ft_max(*stackB)->content)
-            pa(stackA, stackB, counter);
-        else */
-        printf("moves : %d \n", pushmove_calc(ft_max((*stackB)), ft_lstsize(*stackB), ft_pos(*stackB, ft_max((*stackB)))));
-   /*  } */
-    sort_three(stackA, counter);
+        printf("moves : %d \n", optimal_tester(*stackA,*stackB));
+   
+        //sort_three(stackA, counter);
     //first we push to values from the top of A to B
     
     
