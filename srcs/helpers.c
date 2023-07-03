@@ -2,6 +2,8 @@
 #include "./libft/libft.h"
 #include "./ft_printf/ft_printf.h"
 
+//This function is a reproduction of the atoi function, with this i transform 
+//a char  representing a number into to a int
 int	ft_atoi(char const *nptr)
 {
 	int	signal;
@@ -29,6 +31,8 @@ int	ft_atoi(char const *nptr)
 	return (nbr * signal);
 }
 
+//This function allows me to check the order of a given stack, 
+//if return = 1 then its ordered
 int	check_order(t_lst **head)
 {	
 	t_lst *stack;
@@ -43,67 +47,77 @@ int	check_order(t_lst **head)
 	return(1);
 }
 
+//This function checks if the order of a stack is descending
 int	descending(t_lst *stack)
 {
 	int i;
-
+	t_lst *temp;
+	
 	i = stack->content;
-	while (stack)
+	temp = stack;
+	while (temp)
 	{
-		if (i < stack->content)
+		if (i < temp->content)
 			return (0);
-		stack = stack->next;
+		temp = temp->next;
 	}
 	return (1);
 }
 
+//This function is used to count the number of moves that were made to organize the stacks
 void	ft_count()
 {
 	static int counter = 0;
 	counter++;
 }
 
+//This fucntion returns the min value in a given stack
 t_lst *ft_min(t_lst *stack)
 {
     if (stack == NULL)
         return NULL;
 
+	t_lst *temp;
     t_lst *minNode; 
     int minValue;
 
-		minNode = stack;
-		minValue = stack->content;
-		while (stack)
+	temp = stack;
+	minNode = temp;
+	minValue = temp->content;
+	while (temp)
     {
-        if (stack->content < minValue)
+        if (temp->content < minValue)
         {
-            minValue = stack->content;
-            minNode = stack;
+            minValue = temp->content;
+            minNode = temp;
         }
-        stack = stack->next;
+        temp = temp->next;
     }
 
     return (minNode);
 }
 
+//This fucntion returns the max value in a given stack
 t_lst *ft_max(t_lst *stack)
 {
     if (stack == NULL)
         return NULL;
 
+	t_lst *temp;
     t_lst *maxNode; 
     int maxValue; 
 
-		maxNode = stack;
-		maxValue = stack->content;
-		while (stack)
+	temp = stack;
+	maxNode = temp;
+	maxValue = temp->content;
+	while (temp)
     {
-        if (stack->content > maxValue)
+        if (temp->content > maxValue)
         {
-            maxValue = stack->content;
-            maxNode = stack;
+            maxValue = temp->content;
+            maxNode = temp;
         }
-        stack = stack->next;
+        temp = temp->next;
     }
     return (maxNode);
 }

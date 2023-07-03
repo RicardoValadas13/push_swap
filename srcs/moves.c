@@ -2,6 +2,7 @@
 #include "./libft/libft.h"
 #include "./ft_printf/ft_printf.h"
 
+//This function performs the move sa or sb where the top 2 nodes of a stack change between them
 void	sa(t_lst **stack, FunctionCounters *counter)
 {
 	t_lst	*top;
@@ -46,6 +47,8 @@ void	sb(t_lst **stack, FunctionCounters *counter)
 	write(1, "sb\n", 3);
 }
 
+//This function performs the move raor rb where the first element of a stack
+//goes to the last positions
 void	ra(t_lst **stack, FunctionCounters *counter)
 {
 	t_lst	*top;
@@ -54,7 +57,7 @@ void	ra(t_lst **stack, FunctionCounters *counter)
 	if (ft_lstsize(*stack) < 2)
 		return ;
 	top = *stack;
-	last = last_lst(*stack);
+	last = last_in_stack(*stack);
 	*stack = (*stack)->next;
 	(*stack)->prev = NULL;
 	last->next = top;
@@ -72,7 +75,7 @@ void	rb(t_lst **stack, FunctionCounters *counter)
 	if (ft_lstsize(*stack) < 2)
 		return ;
 	top = *stack;
-	last = last_lst(*stack);
+	last = last_in_stack(*stack);
 	*stack = (*stack)->next;
 	(*stack)->prev = NULL;
 	last->next = top;
@@ -82,6 +85,7 @@ void	rb(t_lst **stack, FunctionCounters *counter)
 	write(1, "rb\n", 3);
 }
 
+//This function performs the move rra or rrb where the last element becomes the first 
 void	rra(t_lst **stack, FunctionCounters *counter)
 {
 	t_lst	*prevLast;
@@ -89,7 +93,7 @@ void	rra(t_lst **stack, FunctionCounters *counter)
 
 	if (ft_lstsize(*stack) < 2)
 		return ;
-	last = last_lst(*stack);
+	last = last_in_stack(*stack);
 	prevLast = last->prev;
 	last->prev = NULL;
 	last->next = *stack; 
@@ -107,7 +111,7 @@ void	rrb(t_lst **stack, FunctionCounters *counter)
 
 	if (ft_lstsize(*stack) < 2)
 		return ;
-	last = last_lst(*stack);
+	last = last_in_stack(*stack);
 	prevLast = last->prev;
 	last->prev = NULL;
 	last->next = *stack; 
@@ -118,6 +122,8 @@ void	rrb(t_lst **stack, FunctionCounters *counter)
 	write(1, "rrb\n", 4);
 }
 
+//This function performs the pa or pb move where the first element of a stack is pushed 
+//to the other stack
 void	pa(t_lst **push, t_lst **rec, FunctionCounters *counter)
 {
 	t_lst	*node;

@@ -5,6 +5,7 @@
 #include <unistd.h>
 #include <stdarg.h>
 #include <stdlib.h>
+#include <stdio.h>
 #define RESET   "\033[0m"
 #define RED     "\033[31m"
 #define GREEN   "\033[32m"
@@ -29,10 +30,10 @@ typedef struct
 int main(int ac, char **av);
 int	ft_atoi(char const *nptr);
 int	check_order(t_lst **stack);
-t_lst	*first_in_stack(int nbr);
+t_lst	*create_head(int nbr);
 void	add_to_stack(t_lst **lst, t_lst *new);
 int	ft_lstsize(t_lst *lst);
-void	*last_lst(t_lst *lst);
+void	*last_in_stack(t_lst *lst);
 void	del_node(t_lst	**del);
 void	sa(t_lst **stack, FunctionCounters *counter);
 void	sb(t_lst **stack, FunctionCounters *counter);

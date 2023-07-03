@@ -2,9 +2,13 @@
 #include "./libft/libft.h"
 #include "./ft_printf/ft_printf.h"
 
+//This function sorts the stackA when it only contains 3 elemnets
+//I hard coded this parts because the number of cases are low 
 void    sort_three(t_lst **stackA, FunctionCounters *counter)
 {
     //checks if its in descending order, if it is then proceeds to do two moves
+    if (check_order(stackA))
+        return ;
     if (descending(*stackA))
     {
         sa(stackA, counter);
@@ -30,6 +34,7 @@ void    sort_three(t_lst **stackA, FunctionCounters *counter)
     }
 }
 
+//This function returns the position of a passed (find) in a determined stack
 int ft_pos(t_lst *stack, t_lst *find)
 {
     int i;
@@ -47,54 +52,46 @@ int ft_pos(t_lst *stack, t_lst *find)
 
 //The purpose of this function is to count the moves necessary
 //to push a specific node to the other stack in its most efficent ways
+//stack : it is the stack where i want to calculate the moves
+//size : the size of the stack
+//pos : the position of the number that i want to push
 int pushmove_calc(t_lst *stack, int size, int pos)
 {
     int i;
-    
-    //In this case when the value is located in the lower half and
-    //because of that i calculate the moves as if im doing the rotate move, and then
-    //one push..
-    if (pos < size / 2)
+    t_lst *temp;
+
+    temp = stack;
+    i = 0;
+    while (temp != NULL)
     {
-        i = 0;
-        while (stack != NULL)
+        if (pos < size / 2)
         {
-            stack = stack->prev;
+            temp = temp->prev;
+            i++;
+        }
+        else
+        {
+            temp = temp->next;
             i++;
         }
     }
-    //In this case when the value is located on the upper half of the stack it
-    //is cheaper to do reverse rotate, so i calculate that number of moves, includind
-    //the push..
-    else if (pos >= size / 2)
-    {
-        i = 1;
-        while (stack != NULL)
-        {
-            stack = stack->next;
-            i++;
-        }
-    }
-    else
-        i = 0;
     return (i);
 }
 
 void    sort(t_lst **stackA, t_lst **stackB, FunctionCounters *counter)
 {
-    while (ft_lstsize(*stackA) > 3)
-    {
+    /* while (ft_lstsize(*stackA) > 3)
+    { */
         pa(stackA, stackB, counter);
         pa(stackA, stackB, counter);
-        if ((*stackA)->content > ft_max(*stackB)->content)
+      
+        /* if ((*stackA)->content > ft_max(*stackB)->content)
             pa(stackA, stackB, counter);
-        else
-
-
-        pushmove_calc(ft_max((*stackA)), ft_lstsize(*stackA), ft_pos(*stackA, ft_max((*stackA))));
-    }
+        else */
+        printf("moves : %d \n", pushmove_calc(ft_max((*stackB)), ft_lstsize(*stackB), ft_pos(*stackB, ft_max((*stackB)))));
+   /*  } */
     sort_three(stackA, counter);
     //first we push to values from the top of A to B
-
+    
     
 }

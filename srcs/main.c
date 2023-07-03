@@ -13,8 +13,7 @@ int	main(int ac, char **av)
 
 	stackA = NULL;
 	stackB = NULL;
-
-	//remember to change this to the function i have on my library
+	//I call this function in order to set my counter in my struct to 0
 	ft_memset(&counter, 0, sizeof(FunctionCounters));
 	i = 1;
 	if (ac < 2)
@@ -24,7 +23,7 @@ int	main(int ac, char **av)
 		while (av[i])
 		{
 			num = ft_atoi(av[i]);
-			nodeA = first_in_stack(num);
+			nodeA = create_head(num);
 			add_to_stack(&stackA, nodeA);
 			i++;
 		}
@@ -40,28 +39,36 @@ int	main(int ac, char **av)
 		ft_printf("Now it is with this moves: \n");
 		sort(&stackA, &stackB, &counter);
 		ft_printf("It was solved with %d moves\n", counter.total_count);
+		printf("stackB : %d\n", stackB->content);
 		printresults(stackA, stackB);
 	}
 }
 void	printresults(t_lst	*stackA, t_lst *stackB)
 {
-	t_lst	*A;
-	t_lst	*B;
-
-	A = stackA;
-	B = stackB;
 	ft_printf("Tamanho da lista: %d\n", ft_lstsize(stackA));
+	printf("stackB : %d\n", stackB->content);
 	ft_printf("%s", "---STACK A------STACK B----\n");
-	while (A != NULL || B != NULL)
+	while (stackA != NULL || stackB != NULL)
 	{
-		if (A && B)
-			ft_printf("     %d     |      %d     \n", A->content, B->content);
-		else if (!A && B)
-			ft_printf("            |      %d     \n", B->content);
-		else if (A && !B)
-			ft_printf("     %d     |             \n", A->content);
+		if (stackA && stackB)
+		{
+			printf("stackA & stackB \n");
+			printf("     %d     |      %d     \n", stackA->content, stackB->content);
+		}
+		else if (!stackA && stackB)
+		{
+			printf("!stackA & stackB \n");
+			printf("            |      %d     \n", stackB->content);
+		}
+		else if (stackA && !stackB)
+		{
+			printf("stackA & !stackB \n");
+			printf("     %d     |             \n", stackA->content);
+		}
 		
-		A = A ? A->next : NULL;
-		B = B ? B->next : NULL;
+		stackA = stackA ? stackA->next : NULL;
+		stackB = stackB ? stackB->next : NULL;
 	}
 }
+
+

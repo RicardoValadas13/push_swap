@@ -2,7 +2,8 @@
 #include "./libft/libft.h"
 #include "./ft_printf/ft_printf.h"
 
-t_lst	*first_in_stack(int nbr)
+//This function creates the head of a stack
+t_lst	*create_head(int nbr)
 {
 	t_lst	*node;
 
@@ -20,6 +21,7 @@ t_lst	*first_in_stack(int nbr)
 	return (node);
 }
 
+//This function adds nodes to a stack
 void	add_to_stack(t_lst **lst, t_lst *new)
 {
 	t_lst	*current;
@@ -37,30 +39,38 @@ void	add_to_stack(t_lst **lst, t_lst *new)
 	}
 }
 
+//This function returns the size of a stack
 int	ft_lstsize(t_lst *lst)
 {
 	int	cnt;
+	t_lst *temp;
 
+	temp = lst;
 	cnt = 1;
-	if (lst == NULL)
+	if (temp == NULL)
 		return (0);
-	while (lst->next != NULL)
+	while (temp->next != NULL)
 	{
 		cnt++;
-		lst = lst->next;
+		temp = temp->next;
 	}
 	return (cnt);
 }
 
-void	*last_lst(t_lst *lst)
+//This function returns the last node of the stack
+void	*last_in_stack(t_lst *lst)
 {
-	if (lst == NULL)
+	t_lst *temp;
+
+	temp = lst;
+	if (temp == NULL)
 		return (NULL);
-	while (lst->next)
-		lst = lst->next;
-	return (lst);
+	while (temp->next)
+		temp = temp->next;
+	return (temp);
 }
 
+//This function deletes a node of a given stack
 void	del_node(t_lst	**del)
 {
 	if (*del)
