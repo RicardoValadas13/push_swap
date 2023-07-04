@@ -140,7 +140,7 @@ void	pa(t_lst **push, t_lst **rec, FunctionCounters *counter)
 		(*rec)->prev = node;
 	*rec = node;
 	counter->total_count++;
-	write(1, "pa\n", 3);
+	//write(1, "pa\n", 3);
 }
 
 void	pb(t_lst **push, t_lst **rec, FunctionCounters *counter)

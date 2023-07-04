@@ -23,8 +23,14 @@ typedef struct s_lst
 
 typedef struct 
 {
-    int				total_count;
-} FunctionCounters;
+    int	total_count;
+}		FunctionCounters;
+
+typedef	struct m_lst
+{
+	char	*moves;
+	struct	m_lst *next;
+}			mvs_struct;
 
 
 int main(int ac, char **av);
@@ -52,8 +58,8 @@ void    sort_three(t_lst **stackA, FunctionCounters *counter);
 int	descending(t_lst *stack);
 t_lst *ft_min(t_lst *stack);
 t_lst *ft_max(t_lst *stack);
-int pushmove_calc(t_lst *stack, int size, int pos);
+int topstack_calc(t_lst *stack, int size, int pos);
 int ft_pos(t_lst *stack, t_lst *find);
-int    optimal_tester(t_lst *stackA, t_lst *stackB);
+int    optimal_tester(t_lst *stackA, t_lst *stackB, int moves);
 
 
