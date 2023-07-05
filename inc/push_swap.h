@@ -52,7 +52,7 @@ void	pb(t_lst **push, t_lst **rec, FunctionCounters *counter);
 void    rr(t_lst **stackA, t_lst **stackB, FunctionCounters *counter);
 void    rrr(t_lst **stackA, t_lst **stackB, FunctionCounters *counter);
 void    ss(t_lst **stackA, t_lst **stackB, FunctionCounters *counter);
-void	printresults(t_lst	*stackA, t_lst *stackB);
+void	printresults(t_lst	*stackA, t_lst *stackB, FunctionCounters counter);
 void    sort(t_lst **stackA, t_lst **stackB, FunctionCounters *counter);
 void    sort_three(t_lst **stackA, FunctionCounters *counter);
 int	descending(t_lst *stack);

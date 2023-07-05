@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   moves.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rbenjami <rbenjami@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/07/05 10:58:30 by rbenjami          #+#    #+#             */
+/*   Updated: 2023/07/05 10:58:31 by rbenjami         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/push_swap.h"
-#include "./libft/libft.h"
 #include "./ft_printf/ft_printf.h"
+#include "./libft/libft.h"
 
 //This function performs the move sa or sb where the top 2 nodes of a stack change between them
 void	sa(t_lst **stack, FunctionCounters *counter)
@@ -85,7 +97,7 @@ void	rb(t_lst **stack, FunctionCounters *counter)
 	write(1, "rb\n", 3);
 }
 
-//This function performs the move rra or rrb where the last element becomes the first 
+//This function performs the move rra or rrb where the last element becomes the first
 void	rra(t_lst **stack, FunctionCounters *counter)
 {
 	t_lst	*prevLast;
@@ -96,7 +108,7 @@ void	rra(t_lst **stack, FunctionCounters *counter)
 	last = last_in_stack(*stack);
 	prevLast = last->prev;
 	last->prev = NULL;
-	last->next = *stack; 
+	last->next = *stack;
 	(*stack)->prev = last;
 	prevLast->next = NULL;
 	(*stack) = last;
@@ -114,7 +126,7 @@ void	rrb(t_lst **stack, FunctionCounters *counter)
 	last = last_in_stack(*stack);
 	prevLast = last->prev;
 	last->prev = NULL;
-	last->next = *stack; 
+	last->next = *stack;
 	(*stack)->prev = last;
 	prevLast->next = NULL;
 	(*stack) = last;
@@ -122,7 +134,7 @@ void	rrb(t_lst **stack, FunctionCounters *counter)
 	write(1, "rrb\n", 4);
 }
 
-//This function performs the pa or pb move where the first element of a stack is pushed 
+//This function performs the pa or pb move where the first element of a stack is pushed
 //to the other stack
 void	pa(t_lst **push, t_lst **rec, FunctionCounters *counter)
 {
@@ -145,7 +157,7 @@ void	pa(t_lst **push, t_lst **rec, FunctionCounters *counter)
 
 void	pb(t_lst **push, t_lst **rec, FunctionCounters *counter)
 {
-	t_lst	*node;
+	t_lst *node;
 
 	if (!*push)
 		return ;

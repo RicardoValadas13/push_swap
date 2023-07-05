@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   listmanage.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rbenjami <rbenjami@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/07/05 10:32:33 by rbenjami          #+#    #+#             */
+/*   Updated: 2023/07/05 10:33:09 by rbenjami         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/push_swap.h"
-#include "./libft/libft.h"
 #include "./ft_printf/ft_printf.h"
+#include "./libft/libft.h"
 
 //This function creates the head of a stack
 t_lst	*create_head(int nbr)
@@ -33,7 +45,6 @@ void	add_to_stack(t_lst **lst, t_lst *new)
 	{
 		while (current->next != NULL)
 			current = current->next;
-			
 		current->next = new;
 		new->prev = current;
 	}
@@ -42,8 +53,8 @@ void	add_to_stack(t_lst **lst, t_lst *new)
 //This function returns the size of a stack
 int	ft_lstsize(t_lst *lst)
 {
-	int	cnt;
-	t_lst *temp;
+	int		cnt;
+	t_lst	*temp;
 
 	temp = lst;
 	cnt = 1;
@@ -60,7 +71,7 @@ int	ft_lstsize(t_lst *lst)
 //This function returns the last node of the stack
 void	*last_in_stack(t_lst *lst)
 {
-	t_lst *temp;
+	t_lst	*temp;
 
 	temp = lst;
 	if (temp == NULL)
@@ -71,13 +82,19 @@ void	*last_in_stack(t_lst *lst)
 }
 
 //This function deletes a node of a given stack
-void	del_node(t_lst	**del)
+void	del_node(t_lst **del)
 {
-	if (*del)
-	{
-		(*del)->prev = NULL;
-		(*del)->next = NULL;
-		free(*del);
-		*del = NULL;
-	}
+	t_lst	*prev_node;
+	t_lst	*next_node;
+
+	if (*del == NULL)
+		return ;
+	prev_node = (*del)->prev;
+	next_node = (*del)->next;
+	if (prev_node != NULL)
+		prev_node->next = next_node;
+	if (next_node != NULL)
+		next_node->prev = prev_node;
+	free(*del);
+	*del = NULL;
 }

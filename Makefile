@@ -5,7 +5,8 @@ SRCS =	./srcs/helpers.c \
 		./srcs/main.c \
 		./srcs/moves.c \
 		./srcs/moveshelper.c \
-		./srcs/sorting.c
+		./srcs/sort.c	\
+		./srcs/sort_utils.c
 
 OBJS :=$(SRCS:.c=.o)
 
