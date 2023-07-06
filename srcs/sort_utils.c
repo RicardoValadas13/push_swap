@@ -6,13 +6,12 @@
 /*   By: rbenjami <rbenjami@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 10:30:44 by rbenjami          #+#    #+#             */
-/*   Updated: 2023/07/05 10:31:53 by rbenjami         ###   ########.fr       */
+/*   Updated: 2023/07/06 13:31:02 by rbenjami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/push_swap.h"
-#include "./ft_printf/ft_printf.h"
-#include "./libft/libft.h"
+
 //This fucntion returns the min value in a given stack
 t_lst	*ft_min(t_lst *stack)
 {

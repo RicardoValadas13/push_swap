@@ -6,16 +6,14 @@
 /*   By: rbenjami <rbenjami@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 10:58:30 by rbenjami          #+#    #+#             */
-/*   Updated: 2023/07/05 10:58:31 by rbenjami         ###   ########.fr       */
+/*   Updated: 2023/07/06 14:21:15 by rbenjami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/push_swap.h"
-#include "./ft_printf/ft_printf.h"
-#include "./libft/libft.h"
 
 //This function performs the move sa or sb where the top 2 nodes of a stack change between them
-void	sa(t_lst **stack, FunctionCounters *counter)
+void	sa(t_lst **stack)
 {
 	t_lst	*top;
 
@@ -33,11 +31,10 @@ void	sa(t_lst **stack, FunctionCounters *counter)
 	else
 		top->next = NULL;
 	(*stack)->next = top;
-	counter->total_count++;
 	write(1, "sa\n", 3);
 }
 
-void	sb(t_lst **stack, FunctionCounters *counter)
+void	sb(t_lst **stack)
 {
 	t_lst	*top;
 
@@ -55,13 +52,12 @@ void	sb(t_lst **stack, FunctionCounters *counter)
 	else
 		top->next = NULL;
 	(*stack)->next = top;
-	counter->total_count++;
 	write(1, "sb\n", 3);
 }
 
 //This function performs the move raor rb where the first element of a stack
 //goes to the last positions
-void	ra(t_lst **stack, FunctionCounters *counter)
+void	ra(t_lst **stack)
 {
 	t_lst	*top;
 	t_lst	*last;
@@ -75,11 +71,10 @@ void	ra(t_lst **stack, FunctionCounters *counter)
 	last->next = top;
 	top->prev = last;
 	top->next = NULL;
-	counter->total_count++;
 	write(1, "ra\n", 3);
 }
 
-void	rb(t_lst **stack, FunctionCounters *counter)
+void	rb(t_lst **stack)
 {
 	t_lst	*top;
 	t_lst	*last;
@@ -93,12 +88,11 @@ void	rb(t_lst **stack, FunctionCounters *counter)
 	last->next = top;
 	top->prev = last;
 	top->next = NULL;
-	counter->total_count++;
 	write(1, "rb\n", 3);
 }
 
 //This function performs the move rra or rrb where the last element becomes the first
-void	rra(t_lst **stack, FunctionCounters *counter)
+void	rra(t_lst **stack)
 {
 	t_lst	*prevLast;
 	t_lst	*last;
@@ -112,11 +106,10 @@ void	rra(t_lst **stack, FunctionCounters *counter)
 	(*stack)->prev = last;
 	prevLast->next = NULL;
 	(*stack) = last;
-	counter->total_count++;
 	write(1, "rra\n", 4);
 }
 
-void	rrb(t_lst **stack, FunctionCounters *counter)
+void	rrb(t_lst **stack)
 {
 	t_lst	*prevLast;
 	t_lst	*last;
@@ -130,13 +123,12 @@ void	rrb(t_lst **stack, FunctionCounters *counter)
 	(*stack)->prev = last;
 	prevLast->next = NULL;
 	(*stack) = last;
-	counter->total_count++;
 	write(1, "rrb\n", 4);
 }
 
 //This function performs the pa or pb move where the first element of a stack is pushed
 //to the other stack
-void	pa(t_lst **push, t_lst **rec, FunctionCounters *counter)
+void	pa(t_lst **push, t_lst **rec)
 {
 	t_lst	*node;
 
@@ -151,11 +143,10 @@ void	pa(t_lst **push, t_lst **rec, FunctionCounters *counter)
 	if (*rec != NULL)
 		(*rec)->prev = node;
 	*rec = node;
-	counter->total_count++;
 	//write(1, "pa\n", 3);
 }
 
-void	pb(t_lst **push, t_lst **rec, FunctionCounters *counter)
+void	pb(t_lst **push, t_lst **rec)
 {
 	t_lst *node;
 
@@ -170,6 +161,5 @@ void	pb(t_lst **push, t_lst **rec, FunctionCounters *counter)
 	if (*rec != NULL)
 		(*rec)->prev = node;
 	*rec = node;
-	counter->total_count++;
 	write(1, "pb\n", 3);
 }

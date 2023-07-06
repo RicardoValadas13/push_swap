@@ -6,13 +6,12 @@
 /*   By: rbenjami <rbenjami@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 10:27:54 by rbenjami          #+#    #+#             */
-/*   Updated: 2023/07/05 10:31:08 by rbenjami         ###   ########.fr       */
+/*   Updated: 2023/07/06 14:12:03 by rbenjami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/push_swap.h"
-#include "./ft_printf/ft_printf.h"
-#include "./libft/libft.h"
+
 
 //This function is a reproduction of the atoi function, with this i transform
 //a char  representing a number into to a int
@@ -76,12 +75,3 @@ int	descending(t_lst *stack)
 	return (1);
 }
 
-//This function is used to count the number 
-//of moves that were made to organize the stacks
-void	ft_count(void)
-{
-	static int	counter;
-
-	counter = 0;
-	counter++;
-}

@@ -6,6 +6,8 @@
 #include <stdarg.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include "../srcs/ft_printf/ft_printf.h"
+#include "../srcs/libft/libft.h"
 #define RESET   "\033[0m"
 #define RED     "\033[31m"
 #define GREEN   "\033[32m"
@@ -20,11 +22,6 @@ typedef struct s_lst
 	struct s_lst	*prev;
 	struct s_lst	*next;
 }					t_lst;
-
-typedef struct 
-{
-    int	total_count;
-}		FunctionCounters;
 
 typedef	struct m_lst
 {
@@ -41,25 +38,28 @@ void	add_to_stack(t_lst **lst, t_lst *new);
 int	ft_lstsize(t_lst *lst);
 void	*last_in_stack(t_lst *lst);
 void	del_node(t_lst	**del);
-void	sa(t_lst **stack, FunctionCounters *counter);
-void	sb(t_lst **stack, FunctionCounters *counter);
-void	ra(t_lst **stack, FunctionCounters *counter);
-void	rb(t_lst **stack, FunctionCounters *counter);
-void	rra(t_lst **stack, FunctionCounters *counter);
-void	rrb(t_lst **stack, FunctionCounters *counter);
-void	pa(t_lst **push, t_lst **rec, FunctionCounters *counter);
-void	pb(t_lst **push, t_lst **rec, FunctionCounters *counter);
-void    rr(t_lst **stackA, t_lst **stackB, FunctionCounters *counter);
-void    rrr(t_lst **stackA, t_lst **stackB, FunctionCounters *counter);
-void    ss(t_lst **stackA, t_lst **stackB, FunctionCounters *counter);
-void	printresults(t_lst	*stackA, t_lst *stackB, FunctionCounters counter);
-void    sort(t_lst **stackA, t_lst **stackB, FunctionCounters *counter);
-void    sort_three(t_lst **stackA, FunctionCounters *counter);
+void	sa(t_lst **stack);
+void	sb(t_lst **stack);
+void	ra(t_lst **stack);
+void	rb(t_lst **stack);
+void	rra(t_lst **stack);
+void	rrb(t_lst **stack);
+void	pa(t_lst **push, t_lst **rec);
+void	pb(t_lst **push, t_lst **rec);
+void    rr(t_lst **stackA, t_lst **stackB);
+void    rrr(t_lst **stackA, t_lst **stackB);
+void    ss(t_lst **stackA, t_lst **stackB);
+void	printresults(t_lst	*stackA, t_lst *stackB);
+void    sort(t_lst **stackA, t_lst **stackB);
+void    sort_three(t_lst **stackA);
 int	descending(t_lst *stack);
 t_lst *ft_min(t_lst *stack);
 t_lst *ft_max(t_lst *stack);
-int topstack_calc(t_lst *stack, int size, int pos);
+int topstack_calc(t_lst **stack, int size, int pos, int allow);
 int ft_pos(t_lst *stack, t_lst *find);
-int    optimal_tester(t_lst *stackA, t_lst *stackB, int moves);
+int    optimal_tester(t_lst *stackA, t_lst *stackB);
+int		head(t_lst	*stack);
+void	sort_everything(t_lst	*better, t_lst *stackA, t_lst *stackB);
+
 
 

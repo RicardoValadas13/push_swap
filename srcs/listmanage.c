@@ -6,13 +6,12 @@
 /*   By: rbenjami <rbenjami@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 10:32:33 by rbenjami          #+#    #+#             */
-/*   Updated: 2023/07/05 10:33:09 by rbenjami         ###   ########.fr       */
+/*   Updated: 2023/07/06 13:31:12 by rbenjami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/push_swap.h"
-#include "./ft_printf/ft_printf.h"
-#include "./libft/libft.h"
+
 
 //This function creates the head of a stack
 t_lst	*create_head(int nbr)
