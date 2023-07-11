@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbenjami <rbenjami@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ricardovaladas <ricardovaladas@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 10:38:01 by rbenjami          #+#    #+#             */
-/*   Updated: 2023/07/06 14:25:14 by rbenjami         ###   ########.fr       */
+/*   Updated: 2023/07/11 11:19:42 by ricardovala      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	main(int ac, char **av)
 		printresults(stack_a, stack_b);
 	else
 	{
-		sort(&stack_a, &stack_b);
+		check_sort(&stack_a, &stack_b);
 		printresults(stack_a, stack_b);
 	}
 }

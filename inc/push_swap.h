@@ -50,16 +50,18 @@ void    rr(t_lst **stackA, t_lst **stackB);
 void    rrr(t_lst **stackA, t_lst **stackB);
 void    ss(t_lst **stackA, t_lst **stackB);
 void	printresults(t_lst	*stackA, t_lst *stackB);
-void    sort(t_lst **stackA, t_lst **stackB);
+void    check_sort(t_lst **stackA, t_lst **stackB);
 void    sort_three(t_lst **stackA);
 int	descending(t_lst *stack);
 t_lst *ft_min(t_lst *stack);
 t_lst *ft_max(t_lst *stack);
-int topstack_calc(t_lst **stack, int size, int pos, int allow);
+int topstack_calc(t_lst *stack, int size, int pos);
 int ft_pos(t_lst *stack, t_lst *find);
-int    optimal_tester(t_lst *stackA, t_lst *stackB);
+int    optimal_tester(t_lst *stackB, t_lst *stack_mv);
 int		head(t_lst	*stack);
-void	sort_everything(t_lst	*better, t_lst *stackA, t_lst *stackB);
+void	sortingalg(t_lst *stackA, t_lst *stackB);
+t_lst	*mv_stackB(t_lst *stackA, t_lst *stackB);
+//void	sort_everything(t_lst	*better, t_lst *stackA, t_lst *stackB);
 
 
 

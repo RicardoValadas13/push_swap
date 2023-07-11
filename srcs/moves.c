@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   moves.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbenjami <rbenjami@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ricardovaladas <ricardovaladas@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 10:58:30 by rbenjami          #+#    #+#             */
-/*   Updated: 2023/07/06 14:21:15 by rbenjami         ###   ########.fr       */
+/*   Updated: 2023/07/11 12:40:44 by ricardovala      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,7 +143,7 @@ void	pa(t_lst **push, t_lst **rec)
 	if (*rec != NULL)
 		(*rec)->prev = node;
 	*rec = node;
-	//write(1, "pa\n", 3);
+	write(1, "pa\n", 3);
 }
 
 void	pb(t_lst **push, t_lst **rec)
