@@ -6,26 +6,26 @@
 /*   By: rbenjami <rbenjami@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 10:58:37 by rbenjami          #+#    #+#             */
-/*   Updated: 2023/07/06 14:25:32 by rbenjami         ###   ########.fr       */
+/*   Updated: 2023/07/12 12:25:05 by rbenjami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/push_swap.h"
 
-void	rr(t_lst **stackA, t_lst **stackB)
+void	rr(t_lst **a, t_lst **b)
 {
-	ra(stackA);
-	rb(stackB);
+	ra(a);
+	rb(b);
 }
 
-void	rrr(t_lst **stackA, t_lst **stackB)
+void	rrr(t_lst **a, t_lst **b)
 {
-	rra(stackA);
-	rrb(stackB);
+	rra(a);
+	rrb(b);
 }
 
-void	ss(t_lst **stackA, t_lst **stackB)
+void	ss(t_lst **a, t_lst **b)
 {
-	sa(stackA);
-	sb(stackB);
+	sa(a);
+	sb(b);
 }

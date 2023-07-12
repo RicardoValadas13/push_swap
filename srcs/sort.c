@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sort.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ricardovaladas <ricardovaladas@student.    +#+  +:+       +#+        */
+/*   By: rbenjami <rbenjami@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 10:58:44 by rbenjami          #+#    #+#             */
-/*   Updated: 2023/07/11 12:55:49 by ricardovala      ###   ########.fr       */
+/*   Updated: 2023/07/12 13:19:04 by rbenjami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,28 +15,28 @@
 
 //This function sorts the stackA when it only contains 3 elemnets
 //I hard coded this part because the number of cases are low
-void	sort_three(t_lst **stackA)
+void	sort_three(t_lst **a)
 {
-	if (check_order(stackA))
+	if (check_order(a))
 		return ;
-	if (descending(*stackA))
+	if (descending(*a))
 	{
-		sa(stackA);
-		rra(stackA);
+		sa(a);
+		rra(a);
 	}
-	else if (ft_min(*stackA) == (*stackA))
+	else if (ft_min(*a) == (*a))
 	{
-		rra(stackA);
-		sa(stackA);
+		rra(a);
+		sa(a);
 	}
-	else if ((ft_max(*stackA) == (*stackA)) && !descending(*stackA))
-		ra(stackA);
+	else if ((ft_max(*a) == (*a)) && !descending(*a))
+		ra(a);
 	else
 	{
-		if (ft_max(*stackA) == (*stackA)->next)
-			rra(stackA);
-		else if ((ft_min(*stackA) == (*stackA)->next))
-			sa(stackA);
+		if (ft_max(*a) == (*a)->next)
+			rra(a);
+		else if ((ft_min(*a) == (*a)->next))
+			sa(a);
 	}
 }
 
@@ -96,7 +96,6 @@ int	topstack_calc(t_lst *stack, int size, int pos)
 			i++;
 		}
 	}
-	
 	return (i);
 }
 
@@ -126,66 +125,65 @@ t_lst	*ft_maxbelow(t_lst *stack, int nbr)
 //Second one : When is not the max or min, so I
 //have to use ft_maxbellow in order to find the 
 //number that has to be bellow the number I gonna push
-int	optimal_tester(t_lst *stackB, t_lst *stack_mv)
+int	optimal_tester(t_lst *b, t_lst *mv_a)
 {
 	int moves;
 	
-	moves = topstack_calc(stack_mv, ft_lstsize(stackB),
-				ft_pos(stackB, stack_mv));
+	moves = topstack_calc(mv_a, ft_lstsize(&b),
+				ft_pos(b, mv_a));
 	return (moves);
 }
 
 //This fucntion returns the elemente i need to move
 //in stackB
-t_lst	*mv_stackB(t_lst *stackA, t_lst *stackB)
+t_lst	*mv_stackB(t_lst *a, t_lst *b)
 {
 	t_lst *stack_mv;
 	
 	stack_mv = NULL;
-	if (stackA->content > ft_max(stackB)->content
-		|| stackA->content < ft_min(stackB)->content)
-		stack_mv = ft_max(stackB);		
+	if (a->content > ft_max(b)->content
+		|| a->content < ft_min(b)->content)
+		stack_mv = ft_max(b);		
 	else
-		stack_mv = ft_maxbelow(stackB, stackA->content);
+		stack_mv = ft_maxbelow(b, a->content);
 	return (stack_mv);
 }
 
-void	sort_everything(t_lst	*stackA, t_lst *stackB, t_lst *mv_stacka, t_lst *mv_stackb)
+void	sort_everything(t_lst	*a, t_lst *b, t_lst *mv_a, t_lst *mv_b)
 {
-	while (!head(mv_stackb))
+	while (mv_b->content != b->content)
 	{
-		if (ft_lstsize(stackB) / 2 > ft_pos(stackB, mv_stackb))
+		if (ft_lstsize(&b) / 2 > ft_pos(b, mv_b))
 		{
-			rb(&stackB);
-			stackB = stackB->prev;
+			rb(&b);
+			b = b->prev;
 		}
-		else if (ft_lstsize(stackB) / 2 < ft_pos(stackA, mv_stackb))
+		else if (ft_lstsize(&b) / 2 < ft_pos(a, mv_b))
 		{
-			rrb(&stackB);
-			stackB = stackB->next;	
+			rrb(&b);
+			b = b->next;	
 		}
 	}
-	while (!head(mv_stacka))
+	while (mv_a->content != a->content)
 	{
-		if (ft_lstsize(stackA) / 2 > ft_pos(stackA, mv_stacka))
+		if (ft_lstsize(&a) / 2 > ft_pos(a, mv_a))
 		{
-			ra(&stackA);
-			stackA = stackA->prev;
+			ra(&a);
+			a = a->prev;
 		}	
-		else if (ft_lstsize(stackA) / 2 < ft_pos(stackA, mv_stacka))
+		else if (ft_lstsize(&a) / 2 < ft_pos(a, mv_a))
 		{
-			rra(&stackA);
-			stackA = stackA->next;
+			rra(&a);
+			a = a->next;
 		}
 	}
-	pa(&stackA, &stackB);
+	pb(&a, &b);
 	return ;
 }
 
-
 //This is the function that represents my algorithm it calls all
-//the necessary function for him to work
-void	sortingalg(t_lst *stackA, t_lst *stackB)
+//the necessary functions for him to work
+void	sortingalg(t_lst *a, t_lst *b)
 {
 	int		mvs;
 	int		check;
@@ -193,13 +191,13 @@ void	sortingalg(t_lst *stackA, t_lst *stackB)
 	t_lst	*temp;
 	t_lst	*optim_nbr;
 	
-	temp = stackA;
+	temp = a;
 	mvs = 0;
 	optim_mvs = 0;
 	check = 0;
 	while (temp->next != NULL)
 	{
-		mvs = optimal_tester(stackB, mv_stackB(stackA, stackB)) + topstack_calc(temp, ft_lstsize(stackA), ft_pos(stackA,
+		mvs = optimal_tester(b, mv_stackB(a, b)) + topstack_calc(temp, ft_lstsize(&a), ft_pos(a,
 					temp));	
 		if (mvs < optim_mvs || check++ == 0)
 		{
@@ -208,23 +206,28 @@ void	sortingalg(t_lst *stackA, t_lst *stackB)
 		}
 		temp = temp->next;
 	}
-	sort_everything(stackA, stackB, optim_nbr, mv_stackB(optim_nbr,stackB));
-	//printf("\n\nMove (stackA): %d\nMove (stackB): %d\n\n", optim_nbr->content, mv_stackB(optim_nbr,stackB)->content);
+	sort_everything(a, b, optim_nbr, mv_stackB(optim_nbr,b));
 }
 
-void	check_sort(t_lst **stackA, t_lst **stackB)
+void	check_sort(t_lst **a, t_lst **b)
 {
-
-	if (ft_lstsize(*stackA) > 3)
+	int size;
+	
+	size = ft_lstsize(a);
+	if (size > 3)
 	{
-		pa(stackA, stackB);
-		pa(stackA, stackB);
-		while (ft_lstsize(*stackA) > 3)
+		pb(a, b);
+		pb(a, b);
+		size = ft_lstsize(a);
+		printf("Size: %d\n", size);
+		while (size > 3)
 		{
-			/* printf("here\n");
-			printf("size: %d\n",ft_lstsize(*stackA)); */
-			sortingalg(*stackA,*stackB);
+			sortingalg(*a,*b);
+			size = ft_lstsize(a);
+			printf("stackA: %d\n", (*b)->content);
+			printf("Size: %d\n", size);
 		}
 	}
-	sort_three(stackA);
+	printf("here\n");
+	sort_three(a);
 }

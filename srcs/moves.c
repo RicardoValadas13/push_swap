@@ -3,88 +3,88 @@
 /*                                                        :::      ::::::::   */
 /*   moves.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ricardovaladas <ricardovaladas@student.    +#+  +:+       +#+        */
+/*   By: rbenjami <rbenjami@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 10:58:30 by rbenjami          #+#    #+#             */
-/*   Updated: 2023/07/11 12:40:44 by ricardovala      ###   ########.fr       */
+/*   Updated: 2023/07/12 12:23:24 by rbenjami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/push_swap.h"
 
 //This function performs the move sa or sb where the top 2 nodes of a stack change between them
-void	sa(t_lst **stack)
+void	sa(t_lst **a)
 {
 	t_lst	*top;
 
-	if (ft_lstsize(*stack) < 2)
+	if (ft_lstsize(a) < 2)
 		return ;
-	top = *stack;
-	*stack = top->next;
-	(*stack)->prev = NULL;
-	top->prev = *stack;
-	if ((*stack)->next != NULL)
+	top = *a;
+	(*a) = top->next;
+	(*a)->prev = top;
+	top->prev = NULL;
+	if ((*a)->next != NULL)
 	{
-		top->next = (*stack)->next;
-		(*stack)->next->prev = top;
+		top->next = (*a)->next;
+		(*a)->next->prev = top;
 	}
 	else
 		top->next = NULL;
-	(*stack)->next = top;
+	(*a)->next = top;
 	write(1, "sa\n", 3);
 }
 
-void	sb(t_lst **stack)
+void	sb(t_lst **b)
 {
 	t_lst	*top;
 
-	if (ft_lstsize(*stack) < 2)
+	if (ft_lstsize(b) < 2)
 		return ;
-	top = *stack;
-	*stack = top->next;
-	(*stack)->prev = NULL;
-	top->prev = *stack;
-	if ((*stack)->next != NULL)
+	top = *b;
+	*b = top->next;
+	(*b)->prev = NULL;
+	top->prev = *b;
+	if ((*b)->next != NULL)
 	{
-		top->next = (*stack)->next;
-		(*stack)->next->prev = top;
+		top->next = (*b)->next;
+		(*b)->next->prev = top;
 	}
 	else
 		top->next = NULL;
-	(*stack)->next = top;
+	(*b)->next = top;
 	write(1, "sb\n", 3);
 }
 
 //This function performs the move raor rb where the first element of a stack
 //goes to the last positions
-void	ra(t_lst **stack)
+void	ra(t_lst **a)
 {
 	t_lst	*top;
 	t_lst	*last;
 
-	if (ft_lstsize(*stack) < 2)
+	if (ft_lstsize(a) < 2)
 		return ;
-	top = *stack;
-	last = last_in_stack(*stack);
-	*stack = (*stack)->next;
-	(*stack)->prev = NULL;
+	top = *a;
+	last = last_in_stack(*a);
+	*a = (*a)->next;
+	(*a)->prev = NULL;
 	last->next = top;
 	top->prev = last;
 	top->next = NULL;
 	write(1, "ra\n", 3);
 }
 
-void	rb(t_lst **stack)
+void	rb(t_lst **b)
 {
 	t_lst	*top;
 	t_lst	*last;
 
-	if (ft_lstsize(*stack) < 2)
+	if (ft_lstsize(b) < 2)
 		return ;
-	top = *stack;
-	last = last_in_stack(*stack);
-	*stack = (*stack)->next;
-	(*stack)->prev = NULL;
+	top = *b;
+	last = last_in_stack(*b);
+	*b = (*b)->next;
+	(*b)->prev = NULL;
 	last->next = top;
 	top->prev = last;
 	top->next = NULL;
@@ -92,74 +92,64 @@ void	rb(t_lst **stack)
 }
 
 //This function performs the move rra or rrb where the last element becomes the first
-void	rra(t_lst **stack)
+void	rra(t_lst **a)
 {
 	t_lst	*prevLast;
 	t_lst	*last;
 
-	if (ft_lstsize(*stack) < 2)
+	if (ft_lstsize(a) < 2)
 		return ;
-	last = last_in_stack(*stack);
+	last = last_in_stack(*a);
 	prevLast = last->prev;
 	last->prev = NULL;
-	last->next = *stack;
-	(*stack)->prev = last;
+	last->next = *a;
+	(*a)->prev = last;
 	prevLast->next = NULL;
-	(*stack) = last;
+	(*a) = last;
 	write(1, "rra\n", 4);
 }
 
-void	rrb(t_lst **stack)
+void	rrb(t_lst **b)
 {
 	t_lst	*prevLast;
 	t_lst	*last;
 
-	if (ft_lstsize(*stack) < 2)
+	if (ft_lstsize(b) < 2)
 		return ;
-	last = last_in_stack(*stack);
+	last = last_in_stack(*b);
 	prevLast = last->prev;
 	last->prev = NULL;
-	last->next = *stack;
-	(*stack)->prev = last;
+	last->next = *b;
+	(*b)->prev = last;
 	prevLast->next = NULL;
-	(*stack) = last;
+	(*b) = last;
 	write(1, "rrb\n", 4);
 }
 
 //This function performs the pa or pb move where the first element of a stack is pushed
 //to the other stack
-void	pa(t_lst **push, t_lst **rec)
-{
-	t_lst	*node;
-
-	if (!*push)
-		return ;
-	node = *push;
-	*push = node->next;
-	if (*push != NULL)
-		(*push)->prev = NULL;
-	node->prev = NULL;
-	node->next = *rec;
-	if (*rec != NULL)
-		(*rec)->prev = node;
-	*rec = node;
-	write(1, "pa\n", 3);
-}
-
-void	pb(t_lst **push, t_lst **rec)
+void	pa(t_lst **b, t_lst **a)
 {
 	t_lst *node;
 
-	if (!*push)
+	if (!*b)
 		return ;
-	node = *push;
-	*push = node->next;
-	if (*push != NULL)
-		(*push)->prev = NULL;
-	node->prev = NULL;
-	node->next = *rec;
-	if (*rec != NULL)
-		(*rec)->prev = node;
-	*rec = node;
+	node = *a;
+	*a = *b;
+	*b = (*b)->next;
+	(*a)->next = node;
+	write(1, "pa\n", 3);
+}
+
+void	pb(t_lst **a, t_lst **b)
+{
+	t_lst *node;
+
+	if (!*a)
+		return ;
+	node = *b;
+	*b = *a;
+	*a = (*a)->next;
+	(*b)->next = node;
 	write(1, "pb\n", 3);
 }

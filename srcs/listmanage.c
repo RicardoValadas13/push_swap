@@ -6,7 +6,7 @@
 /*   By: rbenjami <rbenjami@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 10:32:33 by rbenjami          #+#    #+#             */
-/*   Updated: 2023/07/06 13:31:12 by rbenjami         ###   ########.fr       */
+/*   Updated: 2023/07/12 11:30:30 by rbenjami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,12 @@ void	add_to_stack(t_lst **lst, t_lst *new)
 }
 
 //This function returns the size of a stack
-int	ft_lstsize(t_lst *lst)
+int	ft_lstsize(t_lst **lst)
 {
 	int		cnt;
 	t_lst	*temp;
 
-	temp = lst;
+	temp = *lst;
 	cnt = 1;
 	if (temp == NULL)
 		return (0);
