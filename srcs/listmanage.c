@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   listmanage.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbenjami <rbenjami@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ricardovaladas <ricardovaladas@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 10:32:33 by rbenjami          #+#    #+#             */
-/*   Updated: 2023/07/12 11:30:30 by rbenjami         ###   ########.fr       */
+/*   Updated: 2023/07/13 11:57:24 by ricardovala      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int	ft_lstsize(t_lst **lst)
 }
 
 //This function returns the last node of the stack
-void	*last_in_stack(t_lst *lst)
+t_lst	*last_in_stack(t_lst *lst)
 {
 	t_lst	*temp;
 

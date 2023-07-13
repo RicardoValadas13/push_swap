@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sort.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbenjami <rbenjami@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ricardovaladas <ricardovaladas@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 10:58:44 by rbenjami          #+#    #+#             */
-/*   Updated: 2023/07/12 13:19:04 by rbenjami         ###   ########.fr       */
+/*   Updated: 2023/07/13 12:47:12 by ricardovala      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -195,6 +195,7 @@ void	sortingalg(t_lst *a, t_lst *b)
 	mvs = 0;
 	optim_mvs = 0;
 	check = 0;
+	optim_nbr = NULL;
 	while (temp->next != NULL)
 	{
 		mvs = optimal_tester(b, mv_stackB(a, b)) + topstack_calc(temp, ft_lstsize(&a), ft_pos(a,
@@ -219,15 +220,15 @@ void	check_sort(t_lst **a, t_lst **b)
 		pb(a, b);
 		pb(a, b);
 		size = ft_lstsize(a);
-		printf("Size: %d\n", size);
-		while (size > 3)
+		printf("StackA 1st: %d\nStackA last: %d\n", (*a)->next->content,last_in_stack(*a)->prev->content);
+		ra(a);
+		printf("StackA 1st: %d\nStackA last: %d\n", (*a)->content,last_in_stack(*a)->prev->content);
+		/* while (size > 3)
 		{
 			sortingalg(*a,*b);
 			size = ft_lstsize(a);
-			printf("stackA: %d\n", (*b)->content);
-			printf("Size: %d\n", size);
-		}
+		} */
 	}
 	printf("here\n");
-	sort_three(a);
+	//sort_three(a);
 }

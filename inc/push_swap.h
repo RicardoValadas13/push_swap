@@ -36,7 +36,7 @@ int	check_order(t_lst **stack);
 t_lst	*create_head(int nbr);
 void	add_to_stack(t_lst **lst, t_lst *new);
 int	ft_lstsize(t_lst **lst);
-void	*last_in_stack(t_lst *lst);
+t_lst	*last_in_stack(t_lst *lst);
 void	del_node(t_lst	**del);
 void	sa(t_lst **stack);
 void	sb(t_lst **stack);
@@ -60,7 +60,8 @@ int    optimal_tester(t_lst *b, t_lst *stack_mv);
 int		head(t_lst	*stack);
 void	sortingalg(t_lst *a, t_lst *b);
 t_lst	*mv_stackB(t_lst *a, t_lst *b);
-//void	sort_everything(t_lst	*better, t_lst *stackA, t_lst *stackB);
+void	sort_everything(t_lst	*a, t_lst *b, t_lst *mv_a, t_lst *mv_b);
+
 
 
 
