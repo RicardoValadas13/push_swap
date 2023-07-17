@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sort.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ricardovaladas <ricardovaladas@student.    +#+  +:+       +#+        */
+/*   By: rbenjami <rbenjami@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 10:58:44 by rbenjami          #+#    #+#             */
-/*   Updated: 2023/07/17 10:17:38 by ricardovala      ###   ########.fr       */
+/*   Updated: 2023/07/17 13:42:49 by rbenjami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,20 +43,16 @@ void	sort_three(t_lst **a)
 int	ft_pos(t_lst *stack, t_lst *find)
 {
 	int	i;
-	printf("stack : %d\nfind : %d\n",stack->content,find->content);
 	i = 0;
 	while (stack != NULL)
 	{
 		if (stack->content == find->content)
 		{
-	printf("i : %d\n",i);
-			
 			return (i);
 		}
 		stack = stack->next;
 		i++;
 	}
-	printf("i : %d\n",i);
 	return (i);
 }
 
@@ -129,16 +125,16 @@ t_lst	*ft_maxbelow(t_lst *stack, int nbr)
 //Second one : When is not the max or min, so I
 //have to use ft_maxbellow in order to find the 
 //number that has to be bellow the number I gonna push
-int	optimal_tester(t_lst *b, t_lst *mv_a)
+int	optimal_tester(t_lst *b, t_lst *mv_b)
 {
 	int moves;
 	
-	moves = topstack_calc(mv_a, ft_lstsize(&b),
-				ft_pos(b, mv_a));
+	moves = topstack_calc(mv_b, ft_lstsize(&b),
+				ft_pos(b, mv_b));
 	return (moves);
 }
 
-//This fucntion returns the elemente i need to move
+//This fucntion returns the elements i need to move
 //in stackB
 t_lst	*mv_stackB(t_lst *a, t_lst *b)
 {
@@ -154,37 +150,28 @@ t_lst	*mv_stackB(t_lst *a, t_lst *b)
 
 void	sort_everything(t_lst	*a, t_lst *b, t_lst *mv_a, t_lst *mv_b)
 {
-	printf("\n------------------------\n\nmv_b : %d\nb : %d %d %d\n\n",mv_b->content, b->content,b->next->content,b->next->next->content);
+	printf("\n------------------------\n\nmv_b : %d\nmv_a : %d\nheadB : %d\nheadA : %d\n\n",mv_b->content, mv_a->content, b->content, a->content);
 
 	while (mv_b->content != b->content)
 	{
 		if (ft_lstsize(&b) / 2 > ft_pos(b, mv_b))
-		{
-			printf("head : %d\n",b->content);
 			rb(&b);
-		}
 		else if (ft_lstsize(&b) / 2 < ft_pos(b, mv_b))
 		{
-			printf("head : %d\n",b->content);
 			rrb(&b);
-		}
+		}	
 	}
-
+	print_stacks(a, b);	
+	
 	while (mv_a->content != a->content)
 	{
 		if (ft_lstsize(&a) / 2 > ft_pos(a, mv_a))
-		{
-			printf("head : %d\n",b->content);
 			ra(&a);
-		}
 		else if (ft_lstsize(&a) / 2 < ft_pos(a, mv_a))
-		{
-			printf("head : %d\n",b->content);	
 			rra(&a);
-		}
 	}
 	pb(&a, &b);
-	return ;
+	print_stacks(a, b);
 }
 
 //This is the function that represents my algorithm it calls all
@@ -197,11 +184,11 @@ void	sortingalg(t_lst *a, t_lst *b)
 	t_lst	*temp;
 	t_lst	*optim_nbr;
 	
-	temp = a;
 	mvs = 0;
 	optim_mvs = 0;
 	check = 0;
 	optim_nbr = NULL;
+	temp = a;
 	while (temp->next != NULL)
 	{
 		mvs = optimal_tester(b, mv_stackB(a, b)) + topstack_calc(temp, ft_lstsize(&a), ft_pos(a,
@@ -213,8 +200,9 @@ void	sortingalg(t_lst *a, t_lst *b)
 		}
 		temp = temp->next;
 	}
-	printf("sortingalg\n");
 	sort_everything(a, b, optim_nbr, mv_stackB(optim_nbr,b));
+	printf("FINISH\n");
+	print_stacks(a, b);	
 }
 
 void	check_sort(t_lst **a, t_lst **b)
@@ -224,17 +212,18 @@ void	check_sort(t_lst **a, t_lst **b)
 	size = ft_lstsize(a);
 	if (size > 3)
 	{
+		print_stacks(*a, *b);	
 		pb(a, b);
 		pb(a, b);
 		pb(a, b);
+		print_stacks(*a, *b);	
 		size = ft_lstsize(a);
 		printf("Size: %d\n", size);
-		last_in_stack(*a);
 		while (size > 3)
 		{
+			size = 0;
 			sortingalg(*a,*b);
-			size = ft_lstsize(a);
-			printf("Size: %d\n", size);
+			size += ft_lstsize(a);
 		}
 	}
 	sort_three(a);

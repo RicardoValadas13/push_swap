@@ -6,7 +6,7 @@
 /*   By: rbenjami <rbenjami@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 10:30:44 by rbenjami          #+#    #+#             */
-/*   Updated: 2023/07/06 13:31:02 by rbenjami         ###   ########.fr       */
+/*   Updated: 2023/07/17 11:39:10 by rbenjami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,20 +41,15 @@ t_lst	*ft_max(t_lst *stack)
 {
 	t_lst	*temp;
 	t_lst	*max_node;
-	int		max_value;
 
 	if (stack == NULL)
 		return (NULL);
 	temp = stack;
 	max_node = temp;
-	max_value = temp->content;
 	while (temp)
 	{
-		if (temp->content > max_value)
-		{
-			max_value = temp->content;
+		if (temp->content > max_node->content)
 			max_node = temp;
-		}
 		temp = temp->next;
 	}
 	return (max_node);

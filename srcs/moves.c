@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   moves.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ricardovaladas <ricardovaladas@student.    +#+  +:+       +#+        */
+/*   By: rbenjami <rbenjami@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 10:58:30 by rbenjami          #+#    #+#             */
-/*   Updated: 2023/07/14 12:52:39 by ricardovala      ###   ########.fr       */
+/*   Updated: 2023/07/17 12:52:28 by rbenjami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,22 +15,22 @@
 //This function performs the move sa or sb where the top 2 nodes of a stack change between them
 void	swap(t_lst **stack)
 {
-	t_lst	*head;
+	t_lst	*node;
 
 	if (!stack || ft_lstsize(stack) < 2)
 		return ;
-	head = *stack;
-	(*stack) = head->next;
-	(*stack)->prev = head;
-	head->prev = NULL;
+	node = *stack;
+	(*stack) = node->next;
+	(*stack)->prev = NULL;
+	node->prev = (*stack);
 	if ((*stack)->next != NULL)
 	{
-		head->next = (*stack)->next;
-		(*stack)->next->prev = head;
+		node->next = (*stack)->next;
+		(*stack)->next->prev = node;
 	}
 	else
-		head->next = NULL;
-	(*stack)->next = head;
+		node->next = NULL;
+	(*stack)->next = node;
 }
 
 void	sa(t_lst	**stacka)
@@ -49,26 +49,26 @@ void	sb(t_lst	**stackb)
 
 void rotate(t_lst **stack)
 {
-    t_lst *head;
+	t_lst *head;
 	t_lst *temp;
-    t_lst *last;
+	t_lst *last;
 
-    if (!stack || ft_lstsize(stack) < 2)
-        return;
-    temp = *stack;
+	if (!stack || ft_lstsize(stack) < 2)
+		return;
+	temp = *stack;
 	head = (*stack)->next;
-    last = last_in_stack(*stack);
 	head->prev = NULL;
+	last = last_in_stack(*stack);
 	temp->prev = last;
 	temp->next = NULL;
 	last->next = temp;
-    *stack = head;
+	*stack = head;
 }
 
 void	ra(t_lst **stacka)
 {
 	rotate(stacka);
-    write(1, "ra\n", 3);
+  write(1, "ra\n", 3);
 }
 
 void	rb(t_lst **stackb)
@@ -81,12 +81,8 @@ void	rev_rotate(t_lst **stack)
 {
 	t_lst	*last;
 
-	printf("chegou\n");
 	if (ft_lstsize(stack) < 2)
-	{
-		
 		return ;
-	}
 	last = last_in_stack(*stack);
 	last->prev->next = NULL;
 	last->prev = NULL;
@@ -103,7 +99,6 @@ void	rra(t_lst **stacka)
 
 void	rrb(t_lst **stackb)
 {
-	printf("entrou\n");
 	rev_rotate(stackb);
 	write(1, "rrb\n", 4);
 }
@@ -117,20 +112,24 @@ void	push(t_lst **push, t_lst **receive)
 
 	if (!*push)
 		return ;
-	node = *receive;
-	*receive = *push;
+	node = *push;
 	*push = (*push)->next;
-	(*receive)->next = node;
+	if (*push)
+		(*push)->prev = NULL;
+	node->next = *receive;
+	if (*receive)
+		(*receive)->prev = node;
+	*receive = node;
 }
 
 void	pa(t_lst	**stacka, t_lst	**stackb)
 {
-	push(stackb,stacka);
+	push(stackb, stacka);
 	write(1, "pa\n", 3);
 }
 
 void	pb(t_lst	**stacka, t_lst	**stackb)
 {
-	push(stacka,stackb);
+	push(stacka, stackb);
 	write(1, "pb\n", 3);
 }

@@ -65,7 +65,7 @@ int		head(t_lst	*stack);
 void	sortingalg(t_lst *a, t_lst *b);
 t_lst	*mv_stackB(t_lst *a, t_lst *b);
 void	sort_everything(t_lst	*a, t_lst *b, t_lst *mv_a, t_lst *mv_b);
-
+void print_stacks(t_lst *stackA, t_lst *stackB);
 
 
 

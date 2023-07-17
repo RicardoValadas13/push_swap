@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ricardovaladas <ricardovaladas@student.    +#+  +:+       +#+        */
+/*   By: rbenjami <rbenjami@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 10:38:01 by rbenjami          #+#    #+#             */
-/*   Updated: 2023/07/13 11:36:56 by ricardovala      ###   ########.fr       */
+/*   Updated: 2023/07/17 13:13:33 by rbenjami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,4 +34,30 @@ int	main(int ac, char **av)
 		check_sort(&a, &b);
 }
 
+void print_stacks(t_lst *stackA, t_lst *stackB)
+{
+    t_lst *tempA = stackA;
+    t_lst *tempB = stackB;
+
+    while (tempA != NULL || tempB != NULL) {
+        if (tempA != NULL) {
+            printf("%-8d", tempA->content);
+            tempA = tempA->next;
+        } else {
+            printf("         ");
+        }
+
+        printf("  |  ");
+
+        if (tempB != NULL) {
+            printf("%-8d", tempB->content);
+            tempB = tempB->next;
+        }
+
+        printf("\n");
+    }
+
+    printf("--------  |  --------\n");
+    printf("Stack A   |  Stack B\n\n\n");
+}
 

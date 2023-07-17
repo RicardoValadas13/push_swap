@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   listmanage.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ricardovaladas <ricardovaladas@student.    +#+  +:+       +#+        */
+/*   By: rbenjami <rbenjami@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 10:32:33 by rbenjami          #+#    #+#             */
-/*   Updated: 2023/07/14 13:20:10 by ricardovala      ###   ########.fr       */
+/*   Updated: 2023/07/17 10:23:47 by rbenjami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ int	ft_lstsize(t_lst **lst)
 		cnt++;
 		temp = temp->next;
 	}
-	printf("cnt : %d\n",cnt);
 	return (cnt);
 }
 
