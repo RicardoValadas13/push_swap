@@ -3,29 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   moveshelper.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbenjami <rbenjami@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ricardovaladas <ricardovaladas@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 10:58:37 by rbenjami          #+#    #+#             */
-/*   Updated: 2023/07/12 12:25:05 by rbenjami         ###   ########.fr       */
+/*   Updated: 2023/07/14 12:20:18 by ricardovala      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/push_swap.h"
 
-void	rr(t_lst **a, t_lst **b)
+void	rr(t_lst **stacka, t_lst **stackb)
 {
-	ra(a);
-	rb(b);
+	ra(stacka);
+	rb(stackb);
 }
 
-void	rrr(t_lst **a, t_lst **b)
+void	rrr(t_lst **stacka, t_lst **stackb)
 {
-	rra(a);
-	rrb(b);
+	rra(stacka);
+	rrb(stackb);
 }
 
-void	ss(t_lst **a, t_lst **b)
+void	ss(t_lst **stacka, t_lst **stackb)
 {
-	sa(a);
-	sb(b);
+	sa(stacka);
+	sb(stackb);
 }

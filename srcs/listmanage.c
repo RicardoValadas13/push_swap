@@ -6,7 +6,7 @@
 /*   By: ricardovaladas <ricardovaladas@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 10:32:33 by rbenjami          #+#    #+#             */
-/*   Updated: 2023/07/13 11:57:24 by ricardovala      ###   ########.fr       */
+/*   Updated: 2023/07/14 13:20:10 by ricardovala      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,16 +54,17 @@ int	ft_lstsize(t_lst **lst)
 {
 	int		cnt;
 	t_lst	*temp;
-
+	
 	temp = *lst;
-	cnt = 1;
-	if (temp == NULL)
+	cnt = 0;
+	if (!temp)
 		return (0);
-	while (temp->next != NULL)
+	while (temp != NULL)
 	{
 		cnt++;
 		temp = temp->next;
 	}
+	printf("cnt : %d\n",cnt);
 	return (cnt);
 }
 
@@ -75,7 +76,7 @@ t_lst	*last_in_stack(t_lst *lst)
 	temp = lst;
 	if (temp == NULL)
 		return (NULL);
-	while (temp->next)
+	while (temp->next != NULL)
 		temp = temp->next;
 	return (temp);
 }

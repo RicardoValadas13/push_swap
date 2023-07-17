@@ -6,12 +6,11 @@
 /*   By: ricardovaladas <ricardovaladas@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 10:58:44 by rbenjami          #+#    #+#             */
-/*   Updated: 2023/07/13 12:47:12 by ricardovala      ###   ########.fr       */
+/*   Updated: 2023/07/17 10:17:38 by ricardovala      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/push_swap.h"
-
 
 //This function sorts the stackA when it only contains 3 elemnets
 //I hard coded this part because the number of cases are low
@@ -44,15 +43,20 @@ void	sort_three(t_lst **a)
 int	ft_pos(t_lst *stack, t_lst *find)
 {
 	int	i;
-
+	printf("stack : %d\nfind : %d\n",stack->content,find->content);
 	i = 0;
 	while (stack != NULL)
 	{
 		if (stack->content == find->content)
+		{
+	printf("i : %d\n",i);
+			
 			return (i);
+		}
 		stack = stack->next;
 		i++;
 	}
+	printf("i : %d\n",i);
 	return (i);
 }
 
@@ -140,7 +144,6 @@ t_lst	*mv_stackB(t_lst *a, t_lst *b)
 {
 	t_lst *stack_mv;
 	
-	stack_mv = NULL;
 	if (a->content > ft_max(b)->content
 		|| a->content < ft_min(b)->content)
 		stack_mv = ft_max(b);		
@@ -151,30 +154,33 @@ t_lst	*mv_stackB(t_lst *a, t_lst *b)
 
 void	sort_everything(t_lst	*a, t_lst *b, t_lst *mv_a, t_lst *mv_b)
 {
+	printf("\n------------------------\n\nmv_b : %d\nb : %d %d %d\n\n",mv_b->content, b->content,b->next->content,b->next->next->content);
+
 	while (mv_b->content != b->content)
 	{
 		if (ft_lstsize(&b) / 2 > ft_pos(b, mv_b))
 		{
+			printf("head : %d\n",b->content);
 			rb(&b);
-			b = b->prev;
 		}
-		else if (ft_lstsize(&b) / 2 < ft_pos(a, mv_b))
+		else if (ft_lstsize(&b) / 2 < ft_pos(b, mv_b))
 		{
+			printf("head : %d\n",b->content);
 			rrb(&b);
-			b = b->next;	
 		}
 	}
+
 	while (mv_a->content != a->content)
 	{
 		if (ft_lstsize(&a) / 2 > ft_pos(a, mv_a))
 		{
+			printf("head : %d\n",b->content);
 			ra(&a);
-			a = a->prev;
-		}	
+		}
 		else if (ft_lstsize(&a) / 2 < ft_pos(a, mv_a))
 		{
+			printf("head : %d\n",b->content);	
 			rra(&a);
-			a = a->next;
 		}
 	}
 	pb(&a, &b);
@@ -207,6 +213,7 @@ void	sortingalg(t_lst *a, t_lst *b)
 		}
 		temp = temp->next;
 	}
+	printf("sortingalg\n");
 	sort_everything(a, b, optim_nbr, mv_stackB(optim_nbr,b));
 }
 
@@ -219,16 +226,16 @@ void	check_sort(t_lst **a, t_lst **b)
 	{
 		pb(a, b);
 		pb(a, b);
+		pb(a, b);
 		size = ft_lstsize(a);
-		printf("StackA 1st: %d\nStackA last: %d\n", (*a)->next->content,last_in_stack(*a)->prev->content);
-		ra(a);
-		printf("StackA 1st: %d\nStackA last: %d\n", (*a)->content,last_in_stack(*a)->prev->content);
-		/* while (size > 3)
+		printf("Size: %d\n", size);
+		last_in_stack(*a);
+		while (size > 3)
 		{
 			sortingalg(*a,*b);
 			size = ft_lstsize(a);
-		} */
+			printf("Size: %d\n", size);
+		}
 	}
-	printf("here\n");
-	//sort_three(a);
+	sort_three(a);
 }
