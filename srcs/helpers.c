@@ -6,7 +6,7 @@
 /*   By: rbenjami <rbenjami@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 10:27:54 by rbenjami          #+#    #+#             */
-/*   Updated: 2023/07/12 13:22:56 by rbenjami         ###   ########.fr       */
+/*   Updated: 2023/07/17 14:09:48 by rbenjami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,13 +59,13 @@ int	check_order(t_lst **head)
 }
 
 //This function checks if the order of a stack is descending
-int	descending(t_lst *stack)
+int	descending(t_lst **stack)
 {
 	int		i;
 	t_lst	*temp;
 
-	i = stack->content;
-	temp = stack;
+	temp = *stack;
+	i = temp->content;
 	while (temp)
 	{
 		if (i < temp->content)

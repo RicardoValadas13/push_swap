@@ -6,7 +6,7 @@
 /*   By: rbenjami <rbenjami@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 10:58:44 by rbenjami          #+#    #+#             */
-/*   Updated: 2023/07/17 13:42:49 by rbenjami         ###   ########.fr       */
+/*   Updated: 2023/07/17 14:29:07 by rbenjami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	sort_three(t_lst **a)
 {
 	if (check_order(a))
 		return ;
-	if (descending(*a))
+	if (descending(a))
 	{
 		sa(a);
 		rra(a);
@@ -28,7 +28,7 @@ void	sort_three(t_lst **a)
 		rra(a);
 		sa(a);
 	}
-	else if ((ft_max(*a) == (*a)) && !descending(*a))
+	else if ((ft_max(*a) == (*a)) && !descending(a))
 		ra(a);
 	else
 	{
@@ -148,35 +148,35 @@ t_lst	*mv_stackB(t_lst *a, t_lst *b)
 	return (stack_mv);
 }
 
-void	sort_everything(t_lst	*a, t_lst *b, t_lst *mv_a, t_lst *mv_b)
+void	sort_everything(t_lst	**a, t_lst **b, t_lst *mv_a, t_lst *mv_b)
 {
-	printf("\n------------------------\n\nmv_b : %d\nmv_a : %d\nheadB : %d\nheadA : %d\n\n",mv_b->content, mv_a->content, b->content, a->content);
+	printf("\n------------------------\n\nmv_b : %d\nmv_a : %d\nheadB : %d\nheadA : %d\n\n",mv_b->content, mv_a->content, (*b)->content, (*a)->content);
 
-	while (mv_b->content != b->content)
+	while (mv_b->content != (*b)->content)
 	{
-		if (ft_lstsize(&b) / 2 > ft_pos(b, mv_b))
-			rb(&b);
-		else if (ft_lstsize(&b) / 2 < ft_pos(b, mv_b))
-		{
-			rrb(&b);
-		}	
+		if (ft_lstsize(b) == 2 || ft_pos(mv_b, *b) == 2)
+			sb(b);
+		else if (ft_lstsize(b) / 2 > ft_pos(*b, mv_b))
+			rb(b);
+		else if (ft_lstsize(b) / 2 < ft_pos(*b, mv_b))
+			rrb(b);
 	}
-	print_stacks(a, b);	
+	print_stacks(*a, *b);	
 	
-	while (mv_a->content != a->content)
+	while (mv_a->content != (*a)->content)
 	{
-		if (ft_lstsize(&a) / 2 > ft_pos(a, mv_a))
-			ra(&a);
-		else if (ft_lstsize(&a) / 2 < ft_pos(a, mv_a))
-			rra(&a);
+		if (ft_lstsize(a) / 2 > ft_pos(*a, mv_a))
+			ra(a);
+		else if (ft_lstsize(a) / 2 < ft_pos(*a, mv_a))
+			rra(a);
 	}
-	pb(&a, &b);
-	print_stacks(a, b);
+	pb(a, b);
+	print_stacks(*a, *b);	
 }
 
 //This is the function that represents my algorithm it calls all
 //the necessary functions for him to work
-void	sortingalg(t_lst *a, t_lst *b)
+void	sortingalg(t_lst **a, t_lst **b)
 {
 	int		mvs;
 	int		check;
@@ -188,10 +188,10 @@ void	sortingalg(t_lst *a, t_lst *b)
 	optim_mvs = 0;
 	check = 0;
 	optim_nbr = NULL;
-	temp = a;
+	temp = *a;
 	while (temp->next != NULL)
 	{
-		mvs = optimal_tester(b, mv_stackB(a, b)) + topstack_calc(temp, ft_lstsize(&a), ft_pos(a,
+		mvs = optimal_tester(*b, mv_stackB(*a, *b)) + topstack_calc(temp, ft_lstsize(a), ft_pos(*a,
 					temp));	
 		if (mvs < optim_mvs || check++ == 0)
 		{
@@ -200,9 +200,8 @@ void	sortingalg(t_lst *a, t_lst *b)
 		}
 		temp = temp->next;
 	}
-	sort_everything(a, b, optim_nbr, mv_stackB(optim_nbr,b));
-	printf("FINISH\n");
-	print_stacks(a, b);	
+	printf("here\n");
+	sort_everything(a, b, optim_nbr, mv_stackB(optim_nbr, *b));
 }
 
 void	check_sort(t_lst **a, t_lst **b)
@@ -215,16 +214,16 @@ void	check_sort(t_lst **a, t_lst **b)
 		print_stacks(*a, *b);	
 		pb(a, b);
 		pb(a, b);
-		pb(a, b);
 		print_stacks(*a, *b);	
 		size = ft_lstsize(a);
-		printf("Size: %d\n", size);
 		while (size > 3)
 		{
-			size = 0;
-			sortingalg(*a,*b);
-			size += ft_lstsize(a);
+			sortingalg(a, b);
+			print_stacks(*a, *b);
+			size = ft_lstsize(a);
 		}
 	}
 	sort_three(a);
+	print_stacks(*a, *b);
+
 }
