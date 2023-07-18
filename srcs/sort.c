@@ -6,7 +6,7 @@
 /*   By: ricardovaladas <ricardovaladas@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 10:58:44 by rbenjami          #+#    #+#             */
-/*   Updated: 2023/07/18 13:04:23 by ricardovala      ###   ########.fr       */
+/*   Updated: 2023/07/18 14:00:31 by ricardovala      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -223,7 +223,10 @@ void	sortingalg(t_lst **a, t_lst **b)
 
 void	sendback(t_lst **a,t_lst **b)
 {
-		sort_stacka(a, ft_maxover(a, (*b)->content));
+		if ((*b)->content > ft_max(*a)->content)
+			sort_stacka(a, ft_min(*a));
+		else	
+			sort_stacka(a, ft_maxover(a, (*b)->content));
 		pa(b, a);
 }
 void	check_sort(t_lst **a, t_lst **b)
