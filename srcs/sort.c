@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sort.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbenjami <rbenjami@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ricardovaladas <ricardovaladas@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 10:58:44 by rbenjami          #+#    #+#             */
-/*   Updated: 2023/07/17 14:29:07 by rbenjami         ###   ########.fr       */
+/*   Updated: 2023/07/18 13:04:23 by ricardovala      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	sort_three(t_lst **a)
 int	ft_pos(t_lst *stack, t_lst *find)
 {
 	int	i;
-	i = 0;
+	i = 1;
 	while (stack != NULL)
 	{
 		if (stack->content == find->content)
@@ -71,28 +71,28 @@ int		head(t_lst	*stack)
 //stack : it is the stack where i want to calculate the moves
 //size : the size of the stack
 //pos : the position of the number that i want to push
-int	topstack_calc(t_lst *stack, int size, int pos)
+int	topstack_calc(t_lst **stack, int size, int pos)
 {
 	int		i;
-	t_lst	*temp;
+	t_lst	*tmp;
 	
-	temp = stack;
+	tmp = *stack;
 	i = 0;
-	if (head(stack))
+	if (pos == 0)
 		return (0);
 	if (pos < size / 2)
 	{
-		while (temp->prev != NULL)
+		while (tmp->prev != NULL)
 		{
-			temp = temp->prev;
+			tmp = tmp->prev;
 			i++;
 		}
 	}
 	else
 	{
-		while (temp != NULL)
+		while (tmp != NULL)
 		{
-			temp = temp->next;
+			tmp = tmp->next;
 			i++;
 		}
 	}
@@ -101,20 +101,37 @@ int	topstack_calc(t_lst *stack, int size, int pos)
 
 //This function returns the highest number 
 //in the stack bellow the passed number (nbr)
-t_lst	*ft_maxbelow(t_lst *stack, int nbr)
+t_lst	*ft_maxbelow(t_lst **stack, int nbr)
 {
 	t_lst	*maxnbr;
-
-	maxnbr = stack;
-	while (stack != NULL)
+	t_lst	*tmp;
+	
+	maxnbr = NULL;
+	tmp = *stack;
+	while (tmp != NULL)
 	{
-		if (stack->content < nbr)
-			maxnbr = stack;
-		stack = stack->next;
+		if (tmp->content < nbr && (maxnbr == NULL || tmp->content > maxnbr->content))
+			maxnbr = tmp;
+		tmp = tmp->next;
 	}
 	return (maxnbr);
 }
 
+t_lst	*ft_maxover(t_lst **stack, int nbr)
+{
+	t_lst	*maxnbr;
+	t_lst	*tmp;
+	
+	maxnbr = NULL;
+	tmp = *stack;
+	while (tmp != NULL)
+	{
+		if (tmp->content > nbr && (maxnbr == NULL || tmp->content < maxnbr->content))
+			maxnbr = tmp;
+		tmp = tmp->next;
+	}
+	return (maxnbr);
+}
 //This function returns the number of moves 
 //to put the number of stackB correspondent 
 //to the number of the number of StackA that 
@@ -125,53 +142,52 @@ t_lst	*ft_maxbelow(t_lst *stack, int nbr)
 //Second one : When is not the max or min, so I
 //have to use ft_maxbellow in order to find the 
 //number that has to be bellow the number I gonna push
-int	optimal_tester(t_lst *b, t_lst *mv_b)
+int	optimal_tester(t_lst **b, t_lst *mv_b)
 {
 	int moves;
 	
-	moves = topstack_calc(mv_b, ft_lstsize(&b),
-				ft_pos(b, mv_b));
+	moves = topstack_calc(b, ft_lstsize(b),
+				ft_pos(*b, mv_b));
 	return (moves);
 }
 
 //This fucntion returns the elements i need to move
 //in stackB
-t_lst	*mv_stackB(t_lst *a, t_lst *b)
+t_lst	*mv_stackB(t_lst *a, t_lst **b)
 {
 	t_lst *stack_mv;
 	
-	if (a->content > ft_max(b)->content
-		|| a->content < ft_min(b)->content)
-		stack_mv = ft_max(b);		
+	if (a->content > ft_max(*b)->content
+		|| a->content < ft_min(*b)->content)
+		stack_mv = ft_max(*b);		
 	else
 		stack_mv = ft_maxbelow(b, a->content);
 	return (stack_mv);
 }
 
-void	sort_everything(t_lst	**a, t_lst **b, t_lst *mv_a, t_lst *mv_b)
+void	sort_stackb(t_lst	**b, t_lst *mv_b)
 {
-	printf("\n------------------------\n\nmv_b : %d\nmv_a : %d\nheadB : %d\nheadA : %d\n\n",mv_b->content, mv_a->content, (*b)->content, (*a)->content);
-
 	while (mv_b->content != (*b)->content)
 	{
-		if (ft_lstsize(b) == 2 || ft_pos(mv_b, *b) == 2)
+		if (ft_lstsize(b) == 2 || ft_pos(*b, mv_b) == 2)
 			sb(b);
-		else if (ft_lstsize(b) / 2 > ft_pos(*b, mv_b))
+		else if (ft_lstsize(b) / 2 >= ft_pos(*b, mv_b))
 			rb(b);
 		else if (ft_lstsize(b) / 2 < ft_pos(*b, mv_b))
 			rrb(b);
-	}
-	print_stacks(*a, *b);	
-	
+		
+	}	
+}
+
+void	sort_stacka(t_lst **a,  t_lst *mv_a)
+{
 	while (mv_a->content != (*a)->content)
 	{
-		if (ft_lstsize(a) / 2 > ft_pos(*a, mv_a))
+		if (ft_lstsize(a) / 2 >= ft_pos(*a, mv_a))
 			ra(a);
 		else if (ft_lstsize(a) / 2 < ft_pos(*a, mv_a))
 			rra(a);
 	}
-	pb(a, b);
-	print_stacks(*a, *b);	
 }
 
 //This is the function that represents my algorithm it calls all
@@ -181,49 +197,55 @@ void	sortingalg(t_lst **a, t_lst **b)
 	int		mvs;
 	int		check;
 	int		optim_mvs;
-	t_lst	*temp;
+	t_lst	*tmp;
 	t_lst	*optim_nbr;
 	
 	mvs = 0;
 	optim_mvs = 0;
 	check = 0;
 	optim_nbr = NULL;
-	temp = *a;
-	while (temp->next != NULL)
+	tmp = *a;
+	while (tmp != NULL)
 	{
-		mvs = optimal_tester(*b, mv_stackB(*a, *b)) + topstack_calc(temp, ft_lstsize(a), ft_pos(*a,
-					temp));	
+		mvs = optimal_tester(b, mv_stackB(*a, b)) + topstack_calc(a, ft_lstsize(a), ft_pos(*a,
+					tmp));	
 		if (mvs < optim_mvs || check++ == 0)
 		{
 				optim_mvs = mvs;
-				optim_nbr = temp;
+				optim_nbr = tmp;
 		}
-		temp = temp->next;
+		tmp = tmp->next;
 	}
-	printf("here\n");
-	sort_everything(a, b, optim_nbr, mv_stackB(optim_nbr, *b));
+	sort_stacka(a, optim_nbr);
+	sort_stackb(b, mv_stackB(optim_nbr, b));
+	pb(a ,b);
 }
 
+void	sendback(t_lst **a,t_lst **b)
+{
+		sort_stacka(a, ft_maxover(a, (*b)->content));
+		pa(b, a);
+}
 void	check_sort(t_lst **a, t_lst **b)
 {
 	int size;
 	
+	print_stacks(*a, *b);	
 	size = ft_lstsize(a);
 	if (size > 3)
 	{
-		print_stacks(*a, *b);	
 		pb(a, b);
 		pb(a, b);
-		print_stacks(*a, *b);	
 		size = ft_lstsize(a);
-		while (size > 3)
-		{
-			sortingalg(a, b);
-			print_stacks(*a, *b);
-			size = ft_lstsize(a);
-		}
+	}
+	while (size > 3)
+	{
+		sortingalg(a, b);
+		size = ft_lstsize(a);
 	}
 	sort_three(a);
+	while (*b)
+		sendback(a, b);
+	sort_stacka(a, ft_min(*a));
 	print_stacks(*a, *b);
-
 }

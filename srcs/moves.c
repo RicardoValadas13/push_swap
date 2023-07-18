@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   moves.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbenjami <rbenjami@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ricardovaladas <ricardovaladas@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 10:58:30 by rbenjami          #+#    #+#             */
-/*   Updated: 2023/07/17 12:52:28 by rbenjami         ###   ########.fr       */
+/*   Updated: 2023/07/18 12:48:01 by ricardovala      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,7 @@ void	push(t_lst **push, t_lst **receive)
 	*receive = node;
 }
 
-void	pa(t_lst	**stacka, t_lst	**stackb)
+void	pa(t_lst	**stackb, t_lst	**stacka)
 {
 	push(stackb, stacka);
 	write(1, "pa\n", 3);
