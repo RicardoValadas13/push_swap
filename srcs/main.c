@@ -6,7 +6,7 @@
 /*   By: ricardovaladas <ricardovaladas@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 10:38:01 by rbenjami          #+#    #+#             */
-/*   Updated: 2023/07/18 14:27:33 by ricardovala      ###   ########.fr       */
+/*   Updated: 2023/07/18 14:29:16 by ricardovala      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	main(int ac, char **av)
 			add_to_stack(&a, create_head(ft_atoi(av[i++])));
 	}
 	if (check_order(&a))
-		error() ;
+		ordered() ;
     else if (check_errors(&a))
         error();
 	else
@@ -39,6 +39,11 @@ int	main(int ac, char **av)
 void    error()
 {
     write(1, "error\n", 6);
+}
+
+void    ordered()
+{
+    write(1, "ordered\n", 8);
 }
 
 int check_errors(t_lst **a)

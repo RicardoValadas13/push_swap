@@ -72,5 +72,6 @@ void	sendback(t_lst **a,t_lst **b);
 t_lst	*ft_maxover(t_lst **stack, int nbr);
 int check_errors(t_lst **a);
 void    error();
+void    ordered();
 
 
