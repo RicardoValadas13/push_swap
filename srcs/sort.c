@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sort.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ricardovaladas <ricardovaladas@student.    +#+  +:+       +#+        */
+/*   By: rbenjami <rbenjami@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 10:58:44 by rbenjami          #+#    #+#             */
-/*   Updated: 2023/07/18 14:00:31 by ricardovala      ###   ########.fr       */
+/*   Updated: 2023/07/19 16:36:42 by rbenjami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,21 +81,9 @@ int	topstack_calc(t_lst **stack, int size, int pos)
 	if (pos == 0)
 		return (0);
 	if (pos < size / 2)
-	{
-		while (tmp->prev != NULL)
-		{
-			tmp = tmp->prev;
-			i++;
-		}
-	}
-	else
-	{
-		while (tmp != NULL)
-		{
-			tmp = tmp->next;
-			i++;
-		}
-	}
+		i	= size - pos;
+	else if (pos >= size / 2)
+		i = size - pos + 1;
 	return (i);
 }
 
@@ -169,13 +157,10 @@ void	sort_stackb(t_lst	**b, t_lst *mv_b)
 {
 	while (mv_b->content != (*b)->content)
 	{
-		if (ft_lstsize(b) == 2 || ft_pos(*b, mv_b) == 2)
-			sb(b);
-		else if (ft_lstsize(b) / 2 >= ft_pos(*b, mv_b))
+		if (ft_lstsize(b) / 2 >= ft_pos(*b, mv_b))
 			rb(b);
 		else if (ft_lstsize(b) / 2 < ft_pos(*b, mv_b))
 			rrb(b);
-		
 	}	
 }
 
@@ -190,6 +175,23 @@ void	sort_stacka(t_lst **a,  t_lst *mv_a)
 	}
 }
 
+void	sort_stack(t_lst **a,  t_lst *mv_a, t_lst	**b, t_lst *mv_b)
+{
+	while (mv_b->content != (*b)->content)
+	{
+		if (ft_lstsize(b) / 2 >= ft_pos(*b, mv_b))
+			rb(b);
+		else if (ft_lstsize(b) / 2 < ft_pos(*b, mv_b))
+			rrb(b);
+	}	
+	while (mv_a->content != (*a)->content)
+	{
+		if (ft_lstsize(a) / 2 >= ft_pos(*a, mv_a))
+			ra(a);
+		else if (ft_lstsize(a) / 2 < ft_pos(*a, mv_a))
+			rra(a);
+	}
+}
 //This is the function that represents my algorithm it calls all
 //the necessary functions for him to work
 void	sortingalg(t_lst **a, t_lst **b)
@@ -207,8 +209,8 @@ void	sortingalg(t_lst **a, t_lst **b)
 	tmp = *a;
 	while (tmp != NULL)
 	{
-		mvs = optimal_tester(b, mv_stackB(*a, b)) + topstack_calc(a, ft_lstsize(a), ft_pos(*a,
-					tmp));	
+		mvs = optimal_tester(b, mv_stackB(tmp, b)) + topstack_calc(a, ft_lstsize(a), ft_pos(*a,
+					tmp)) + 1;
 		if (mvs < optim_mvs || check++ == 0)
 		{
 				optim_mvs = mvs;
@@ -233,7 +235,7 @@ void	check_sort(t_lst **a, t_lst **b)
 {
 	int size;
 	
-	print_stacks(*a, *b);	
+	//print_stacks(*a, *b);	
 	size = ft_lstsize(a);
 	if (size > 3)
 	{
@@ -250,5 +252,5 @@ void	check_sort(t_lst **a, t_lst **b)
 	while (*b)
 		sendback(a, b);
 	sort_stacka(a, ft_min(*a));
-	print_stacks(*a, *b);
+	//print_stacks(*a, *b);
 }
