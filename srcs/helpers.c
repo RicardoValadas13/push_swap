@@ -6,7 +6,7 @@
 /*   By: ricardovaladas <ricardovaladas@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 10:27:54 by rbenjami          #+#    #+#             */
-/*   Updated: 2023/07/20 15:56:09 by ricardovala      ###   ########.fr       */
+/*   Updated: 2023/07/20 16:18:09 by ricardovala      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,17 +45,19 @@ int	ft_atoi(char const *nptr)
 int	descending(t_lst **stack)
 {
     int prev_value;
+	t_lst *tmp;
 	
-    if (((*stack)) == NULL) 
+	tmp = *stack;
+    if ((tmp) == NULL) 
         return (1);
-    prev_value = (*stack)->content;
-    (*stack) = (*stack)->next;
-    while ((*stack)) 
+    prev_value = tmp->content;
+    tmp = tmp->next;
+    while (tmp) 
 	{
-        if (prev_value < (*stack)->content)
+        if (prev_value < tmp->content)
             return 0; 
-        prev_value = (*stack)->content;
-        (*stack) = (*stack)->next;
+        prev_value = tmp->content;
+        tmp = tmp->next;
     }
     return (1);
 }

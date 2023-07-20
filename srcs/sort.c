@@ -6,7 +6,7 @@
 /*   By: ricardovaladas <ricardovaladas@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 10:58:44 by rbenjami          #+#    #+#             */
-/*   Updated: 2023/07/20 15:57:40 by ricardovala      ###   ########.fr       */
+/*   Updated: 2023/07/20 16:19:17 by ricardovala      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,20 +23,17 @@ void	sort_three(t_lst **a)
 		sa(a, 0);
 		rra(a, 0);
 	}
-	else if (ft_min(*a) == (*a))
+	else if (ft_min(*a)->content == (*a)->content)
 	{
 		rra(a, 0);
 		sa(a, 0);
 	}
-	else if ((ft_max(*a) == (*a)) && !descending(a))
+	else if ((ft_max(*a)->content == (*a)->content) && !descending(a))
 		ra(a, 0);
-	else
-	{
-		if (ft_max(*a) == (*a)->next)
-			rra(a, 0);
-		else if ((ft_min(*a) == (*a)->next))
-			sa(a, 0);
-	}
+	else if (ft_max(*a)->content == (*a)->next->content)
+		rra(a, 0);
+	else if (ft_min(*a)->content == (*a)->next->content)
+		sa(a, 0);
 }
 
 // The purpose of this function is to count the moves necessary
@@ -139,41 +136,42 @@ void	sortingalg(t_lst **a, t_lst **b)
 	}
 	sort_stacks(a, b, topstack_calc(ft_lstsize(a), ft_pos(*a, optim_nbr)),
 		topstack_calc(ft_lstsize(b), ft_pos(*b, mv_stackB(optim_nbr, b))));
-	pb(a, b);
 }
 
 void	sendback(t_lst **a, t_lst **b)
 {
 	if ((*b)->content > ft_max(*a)->content)
-		sort_stacks(a, b, topstack_calc(ft_lstsize(a),
-		ft_pos(*a, ft_min(*a))), 0);
+		sort_stacks(a, b, topstack_calc(ft_lstsize(a), ft_pos(*a, ft_min(*a))),
+			0);
 	else
-		sort_stacks(a, b, topstack_calc(ft_lstsize(a),
-		ft_pos(*a, ft_maxover(a, (*b)->content))), 0);
+		sort_stacks(a, b, topstack_calc(ft_lstsize(a), ft_pos(*a, ft_maxover(a,
+						(*b)->content))), 0);
 	pa(b, a);
 }
 void	check_sort(t_lst **a, t_lst **b)
 {
 	int	size;
-
-	printf("\n\n");
+	
 	print_stacks(*a, *b);
+
 	size = ft_lstsize(a);
 	if (size > 3)
 	{
+			print_stacks(*a, *b);
+
 		pb(a, b);
 		pb(a, b);
 		size = ft_lstsize(a);
-	}
-	while (size > 3)
-	{
-		sortingalg(a, b);
-		size = ft_lstsize(a);
+		while (size > 3)
+		{
+			sortingalg(a, b);
+			pb(a, b);
+			size = ft_lstsize(a);
+		}
 	}
 	sort_three(a);
 	while (*b)
-		sendback(a, b);	
+		sendback(a, b);
 	sort_stacks(a, b, topstack_calc(ft_lstsize(a), ft_pos(*a, ft_min(*a))), 0);
-	printf("\n\n");
 	print_stacks(*a, *b);
 }
