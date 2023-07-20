@@ -6,7 +6,7 @@
 /*   By: ricardovaladas <ricardovaladas@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 10:58:44 by rbenjami          #+#    #+#             */
-/*   Updated: 2023/07/20 16:19:17 by ricardovala      ###   ########.fr       */
+/*   Updated: 2023/07/20 16:42:29 by ricardovala      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,35 +54,41 @@ int	topstack_calc(int size, int pos)
 		i = -1 * (size - pos + 1);
 	return (i);
 }
+int	remaining_rot_a(t_lst **a, int mvs_a)
+{
+	if (mvs_a < 0)
+	{
+			rra(a, 0);
+			mvs_a++;
+	}
+	else if (mvs_a > 0)
+	{
+			ra(a, 0);
+			mvs_a--;
+	}
+	return (mvs_a);
+}
+int	remaining_rot_b(t_lst **b, int mvs_b)
+{
+	if (mvs_b < 0)
+	{
+			rrb(b, 0);
+			mvs_b++;
+	}
+	else if (mvs_b > 0)
+	{
+			rb(b, 0);
+			mvs_b--;
+	}
+	return (mvs_b);
+}
 
 void	sort_remaining(t_lst **a, t_lst **b, int mvs_a, int mvs_b)
 {
 	while (mvs_a != 0)
-	{
-		if (mvs_a < 0)
-		{
-			rra(a, 0);
-			mvs_a++;
-		}
-		else if (mvs_a > 0)
-		{
-			ra(a, 0);
-			mvs_a--;
-		}
-	}
+		mvs_a = remaining_rot_a(a, mvs_a);
 	while (mvs_b != 0)
-	{
-		if (mvs_b < 0)
-		{
-			rrb(b, 0);
-			mvs_b++;
-		}
-		else if (mvs_b > 0)
-		{
-			rb(b, 0);
-			mvs_b--;
-		}
-	}
+		mvs_b = remaining_rot_b(b, mvs_b);
 }
 void	sort_stacks(t_lst **a, t_lst **b, int mvs_a, int mvs_b)
 {

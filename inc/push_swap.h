@@ -63,3 +63,6 @@ void				sort_stacks(t_lst **a, t_lst **b, int mvs_a, int mvs_b);
 void				sort_remaining(t_lst **a, t_lst **b, int mvs_a, int mvs_b);
 int					abs_val(int val);
 void				print_stacks(t_lst *stackA, t_lst *stackB);
+int					remaining_rot_b(t_lst **b, int mvs_b);
+int					remaining_rot_a(t_lst **a, int mvs_a);
+
