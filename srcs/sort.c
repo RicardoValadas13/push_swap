@@ -6,7 +6,7 @@
 /*   By: ricardovaladas <ricardovaladas@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 10:58:44 by rbenjami          #+#    #+#             */
-/*   Updated: 2023/07/20 12:11:00 by ricardovala      ###   ########.fr       */
+/*   Updated: 2023/07/20 15:57:40 by ricardovala      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,10 @@ int	topstack_calc(int size, int pos)
 	int	i;
 
 	i = 0;
-	if (pos == 0)
+	if (pos == 1)
 		return (0);
 	if (pos < size / 2)
-		i = size - pos;
+		i = pos - 1;
 	else if (pos >= size / 2)
 		i = -1 * (size - pos + 1);
 	return (i);
@@ -145,9 +145,11 @@ void	sortingalg(t_lst **a, t_lst **b)
 void	sendback(t_lst **a, t_lst **b)
 {
 	if ((*b)->content > ft_max(*a)->content)
-		sort_stacks(a, b, topstack_calc(ft_lstsize(a),ft_pos(*a, ft_min(*a))), 0);
+		sort_stacks(a, b, topstack_calc(ft_lstsize(a),
+		ft_pos(*a, ft_min(*a))), 0);
 	else
-		sort_stacks(a, b, topstack_calc(ft_lstsize(a),ft_pos(*a, ft_maxover(a, (*b)->content))), 0);
+		sort_stacks(a, b, topstack_calc(ft_lstsize(a),
+		ft_pos(*a, ft_maxover(a, (*b)->content))), 0);
 	pa(b, a);
 }
 void	check_sort(t_lst **a, t_lst **b)
@@ -170,7 +172,7 @@ void	check_sort(t_lst **a, t_lst **b)
 	}
 	sort_three(a);
 	while (*b)
-		sendback(a, b);
+		sendback(a, b);	
 	sort_stacks(a, b, topstack_calc(ft_lstsize(a), ft_pos(*a, ft_min(*a))), 0);
 	printf("\n\n");
 	print_stacks(*a, *b);

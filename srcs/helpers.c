@@ -6,7 +6,7 @@
 /*   By: ricardovaladas <ricardovaladas@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 10:27:54 by rbenjami          #+#    #+#             */
-/*   Updated: 2023/07/20 11:50:45 by ricardovala      ###   ########.fr       */
+/*   Updated: 2023/07/20 15:56:09 by ricardovala      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,18 +44,20 @@ int	ft_atoi(char const *nptr)
 // This function checks if the order of a stack is descending
 int	descending(t_lst **stack)
 {
-	int		i;
-	t_lst	*temp;
-
-	temp = *stack;
-	i = temp->content;
-	while (temp)
+    int prev_value;
+	
+    if (((*stack)) == NULL) 
+        return (1);
+    prev_value = (*stack)->content;
+    (*stack) = (*stack)->next;
+    while ((*stack)) 
 	{
-		if (i < temp->content)
-			return (0);
-		temp = temp->next;
-	}
-	return (1);
+        if (prev_value < (*stack)->content)
+            return 0; 
+        prev_value = (*stack)->content;
+        (*stack) = (*stack)->next;
+    }
+    return (1);
 }
 
 int	abs_val(int val)
