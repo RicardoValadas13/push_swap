@@ -6,14 +6,14 @@
 /*   By: ricardovaladas <ricardovaladas@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 10:27:54 by rbenjami          #+#    #+#             */
-/*   Updated: 2023/07/20 16:18:09 by ricardovala      ###   ########.fr       */
+/*   Updated: 2023/07/21 00:29:10 by ricardovala      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/push_swap.h"
 
 // This function is a reproduction of the atoi function, with this i transform
-// a char  representing a number into to a int
+// a char representing a number into to a int
 int	ft_atoi(char const *nptr)
 {
 	int	signal;
@@ -44,24 +44,25 @@ int	ft_atoi(char const *nptr)
 // This function checks if the order of a stack is descending
 int	descending(t_lst **stack)
 {
-    int prev_value;
-	t_lst *tmp;
-	
+	int		prev_value;
+	t_lst	*tmp;
+
 	tmp = *stack;
-    if ((tmp) == NULL) 
-        return (1);
-    prev_value = tmp->content;
-    tmp = tmp->next;
-    while (tmp) 
+	if ((tmp) == NULL)
+		return (1);
+	prev_value = tmp->content;
+	tmp = tmp->next;
+	while (tmp)
 	{
-        if (prev_value < tmp->content)
-            return 0; 
-        prev_value = tmp->content;
-        tmp = tmp->next;
-    }
-    return (1);
+		if (prev_value < tmp->content)
+			return (0);
+		prev_value = tmp->content;
+		tmp = tmp->next;
+	}
+	return (1);
 }
 
+// This function returns the absolute value a passed val.
 int	abs_val(int val)
 {
 	if (val < 0)
@@ -70,8 +71,9 @@ int	abs_val(int val)
 }
 
 // This fucntion returns the elements i need to move
-// in stackB
-t_lst	*mv_stackB(t_lst *a, t_lst **b)
+// in stackB regarding the number that i want to push
+// from stackA.
+t_lst	*mv_stack_b(t_lst *a, t_lst **b)
 {
 	t_lst	*stack_mv;
 

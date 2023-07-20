@@ -10,11 +10,10 @@ SRCS =	./srcs/helpers.c \
 		./srcs/moves_r.c \
 		./srcs/moves_s.c \
 		./srcs/sort.c \
-		./srcs/sort_utils.c
+		./srcs/sort_utils.c \
+		./srcs/sort_act.c 
 
-PRINTF_DIR = ./srcs/ft_printf/
 LIBFT_DIR = ./srcs/libft/
-PRINTF = $(PRINTF_DIR)/ft_printf.a
 LIBFT = $(LIBFT_DIR)/libft.a
 
 
@@ -25,14 +24,11 @@ CFLAGS = -Wall -Wextra -Werror -g -fsanitize=address
 
 all: $(NAME)
 
-$(NAME): $(LIBFT) $(PRINTF) $(OBJS) 
-	@$(CC) $(OBJS) $(CFLAGS) -L$(PRINTF_DIR) -lftprintf -L$(LIBFT_DIR) -lft -o $(NAME)  
+$(NAME): $(LIBFT) $(OBJS) 
+	@$(CC) $(OBJS) $(CFLAGS) -L$(LIBFT_DIR) -lft -o $(NAME)  
 
 %.o : %.c
 	@$(CC) $(CFLAGS) -c $< -o $@
-
-$(PRINTF):
-	@$(MAKE) -C ./srcs/ft_printf --no-print-directory --silent
 
 $(LIBFT):
 	@$(MAKE) -C ./srcs/libft --no-print-directory --silent
@@ -41,7 +37,6 @@ tester: $(SRCS)
 	@$(CC) $(CFLAGS) $(SRCS)
 
 clean_library:
-	@$(MAKE) -C ./srcs/ft_printf fclean --no-print-directory --silent
 	@$(MAKE) -C ./srcs/libft fclean --no-print-directory --silent
 
 clean:

@@ -6,7 +6,7 @@
 /*   By: ricardovaladas <ricardovaladas@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 10:30:44 by rbenjami          #+#    #+#             */
-/*   Updated: 2023/07/20 15:20:27 by ricardovala      ###   ########.fr       */
+/*   Updated: 2023/07/21 00:35:18 by ricardovala      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,9 @@ t_lst	*ft_max(t_lst *stack)
 	}
 	return (max_node);
 }
-// This function returns the highest number
-// in the stack bellow the passed number (nbr)
+
+// This function returns the node in the stack, that the (nbr)
+// is supossed to be pushed above, in this case imediatly under it
 t_lst	*ft_maxbelow(t_lst **stack, int nbr)
 {
 	t_lst	*maxnbr;
@@ -73,6 +74,8 @@ t_lst	*ft_maxbelow(t_lst **stack, int nbr)
 	return (maxnbr);
 }
 
+// This function returns the node in the stack, that the (nbr)
+// is supossed to be pushed above, in this case imediatly over it
 t_lst	*ft_maxover(t_lst **stack, int nbr)
 {
 	t_lst	*maxnbr;

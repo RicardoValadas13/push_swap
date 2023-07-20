@@ -6,7 +6,7 @@
 /*   By: ricardovaladas <ricardovaladas@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 10:38:01 by rbenjami          #+#    #+#             */
-/*   Updated: 2023/07/20 23:52:59 by ricardovala      ###   ########.fr       */
+/*   Updated: 2023/07/20 23:54:14 by ricardovala      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,13 @@ int	main(int ac, char **av)
 		while (av[i])
 			add_to_stack(&a, create_head(ft_atoi(av[i++])));
 		if (check_dbl(&a))
-			return (write(1,"error\n",6));
+			return (write(1, "error\n", 6));
 		else if (!check_dbl(&a) && !check_order(&a))
 			check_sort(&a, &b);
-		return (write(1,"DONE\n",6));
+		return (write(1, "DONE\n", 6));
 	}
-	return (write(1,"error\n",6));
+	return (write(1, "error\n", 6));
 }
-
 
 /* void	print_stacks(t_lst *stackA, t_lst *stackB)
 {

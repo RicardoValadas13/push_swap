@@ -6,13 +6,14 @@
 /*   By: ricardovaladas <ricardovaladas@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 10:58:30 by rbenjami          #+#    #+#             */
-/*   Updated: 2023/07/20 11:42:10 by ricardovala      ###   ########.fr       */
+/*   Updated: 2023/07/21 00:30:50 by ricardovala      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/push_swap.h"
 
-// This function performs the move sa or sb where the top 2 nodes of a stack change between them
+// This function performs the move sa or sb where the top 
+// 2 nodes of a stack change between them
 void	swap(t_lst **stack)
 {
 	t_lst	*node;
@@ -33,9 +34,8 @@ void	swap(t_lst **stack)
 	(*stack)->next = node;
 }
 
-// This function performs the move ra or rb where the first element of a stack
-// goes to the last positions
-
+// This function performs the move ra or rb where the first 
+// element of a stack goes to the last position
 void	rotate(t_lst **stack)
 {
 	t_lst	*head;
@@ -54,8 +54,8 @@ void	rotate(t_lst **stack)
 	*stack = head;
 }
 
-
-// This function performs the move rra or rrb where the last element becomes the first
+// This function performs the move rra or rrb where
+// the last element becomes the first
 void	rev_rotate(t_lst **stack)
 {
 	t_lst	*last;
@@ -70,10 +70,8 @@ void	rev_rotate(t_lst **stack)
 	*stack = last;
 }
 
-
-
-// This function performs the pa or pb move where the first element of a stack is pushed
-// to the other stack
+// This function performs the pa or pb move where the first element 
+// of a stack is pushed to the other stack
 void	push(t_lst **push, t_lst **receive)
 {
 	t_lst	*node;
@@ -89,4 +87,3 @@ void	push(t_lst **push, t_lst **receive)
 		(*receive)->prev = node;
 	*receive = node;
 }
-

@@ -1,7 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   push_swap.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ricardovaladas <ricardovaladas@student.    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/07/21 00:23:19 by ricardovala       #+#    #+#             */
+/*   Updated: 2023/07/21 00:28:00 by ricardovala      ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #define PUSH_SWAP_H
 #define PUSH_SWAP_H
 
-#include "../srcs/ft_printf/ft_printf.h"
 #include "../srcs/libft/libft.h"
 #include <stdarg.h>
 #include <stdio.h>
@@ -14,12 +25,6 @@ typedef struct s_lst
 	struct s_lst	*prev;
 	struct s_lst	*next;
 }					t_lst;
-
-typedef struct m_lst
-{
-	char			*moves;
-	struct m_lst	*next;
-}					mvs_struct;
 
 int					main(int ac, char **av);
 int					ft_atoi(char const *nptr);
@@ -52,7 +57,7 @@ t_lst				*ft_max(t_lst *stack);
 int					topstack_calc(int size, int pos);
 int					ft_pos(t_lst *stack, t_lst *find);
 void				sortingalg(t_lst **a, t_lst **b);
-t_lst				*mv_stackB(t_lst *a, t_lst **b);
+t_lst				*mv_stack_b(t_lst *a, t_lst **b);
 void				sendback(t_lst **a, t_lst **b);
 t_lst				*ft_maxover(t_lst **stack, int nbr);
 t_lst				*ft_maxbelow(t_lst **stack, int nbr);
@@ -64,4 +69,3 @@ int					abs_val(int val);
 void				print_stacks(t_lst *stackA, t_lst *stackB);
 int					remaining_rot_b(t_lst **b, int mvs_b);
 int					remaining_rot_a(t_lst **a, int mvs_a);
-

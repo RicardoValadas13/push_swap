@@ -6,12 +6,14 @@
 /*   By: ricardovaladas <ricardovaladas@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 11:43:30 by ricardovala       #+#    #+#             */
-/*   Updated: 2023/07/20 23:45:31 by ricardovala      ###   ########.fr       */
+/*   Updated: 2023/07/21 00:26:45 by ricardovala      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/push_swap.h"
 
+// This function takes the arguments and checks if they are
+// existing integers, it returns 1 if not.
 int	check_errors(char **av)
 {
 	int	i;
@@ -21,7 +23,7 @@ int	check_errors(char **av)
 	while (av[i])
 	{
 		j = 0;
-		if(av[i][j] == '+' || av[i][j] == '-')
+		if (av[i][j] == '+' || av[i][j] == '-')
 			j++;
 		while (av[i][j])
 		{
@@ -33,6 +35,8 @@ int	check_errors(char **av)
 	}
 	return (0);
 }
+// This function check for the existing of double values,
+// if that happens it returns 1.
 
 int	check_dbl(t_lst **a)
 {
@@ -55,7 +59,7 @@ int	check_dbl(t_lst **a)
 }
 
 // This function allows me to check the order of a given stack,
-// if return = 1 then its ordered
+// if ordered returns 1.
 int	check_order(t_lst **head)
 {
 	t_lst	*stack;
