@@ -57,7 +57,7 @@ void				sendback(t_lst **a, t_lst **b);
 t_lst				*ft_maxover(t_lst **stack, int nbr);
 t_lst				*ft_maxbelow(t_lst **stack, int nbr);
 int					check_dbl(t_lst **a);
-int					check_errors(char *str);
+int					check_errors(char **av);
 void				sort_stacks(t_lst **a, t_lst **b, int mvs_a, int mvs_b);
 void				sort_remaining(t_lst **a, t_lst **b, int mvs_a, int mvs_b);
 int					abs_val(int val);

@@ -6,25 +6,32 @@
 /*   By: ricardovaladas <ricardovaladas@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 11:43:30 by ricardovala       #+#    #+#             */
-/*   Updated: 2023/07/20 23:02:49 by ricardovala      ###   ########.fr       */
+/*   Updated: 2023/07/20 23:45:31 by ricardovala      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/push_swap.h"
 
-int	check_errors(char *str)
+int	check_errors(char **av)
 {
-	if (!str || *str == '\0') 
-        return (1);
-    if (*str == '+' || *str == '-') 
-        str++;
-    while (*str) 
+	int	i;
+	int	j;
+
+	i = 1;
+	while (av[i])
 	{
-        if (!ft_isdigit(*str))
-            return (1);
-        str++;
-    }
-    return (0);
+		j = 0;
+		if(av[i][j] == '+' || av[i][j] == '-')
+			j++;
+		while (av[i][j])
+		{
+			if (!ft_isdigit(av[i][j]))
+				return (1);
+			j++;
+		}
+		i++;
+	}
+	return (0);
 }
 
 int	check_dbl(t_lst **a)
