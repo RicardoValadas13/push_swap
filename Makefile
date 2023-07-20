@@ -3,9 +3,13 @@ NAME = push_swap
 SRCS =	./srcs/helpers.c \
 		./srcs/listmanage.c \
 		./srcs/main.c \
+		./srcs/check_arg.c \
 		./srcs/moves.c \
-		./srcs/moveshelper.c \
-		./srcs/sort.c	\
+		./srcs/moves_dbl.c \
+		./srcs/moves_p.c \
+		./srcs/moves_r.c \
+		./srcs/moves_s.c \
+		./srcs/sort.c \
 		./srcs/sort_utils.c
 
 PRINTF_DIR = ./srcs/ft_printf/

@@ -6,13 +6,13 @@
 /*   By: ricardovaladas <ricardovaladas@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 10:58:30 by rbenjami          #+#    #+#             */
-/*   Updated: 2023/07/18 12:48:01 by ricardovala      ###   ########.fr       */
+/*   Updated: 2023/07/20 11:42:10 by ricardovala      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/push_swap.h"
 
-//This function performs the move sa or sb where the top 2 nodes of a stack change between them
+// This function performs the move sa or sb where the top 2 nodes of a stack change between them
 void	swap(t_lst **stack)
 {
 	t_lst	*node;
@@ -33,28 +33,17 @@ void	swap(t_lst **stack)
 	(*stack)->next = node;
 }
 
-void	sa(t_lst	**stacka)
-{
-	swap(stacka);
-	write(1, "sa\n", 3);
-}
+// This function performs the move ra or rb where the first element of a stack
+// goes to the last positions
 
-void	sb(t_lst	**stackb)
+void	rotate(t_lst **stack)
 {
-	swap(stackb);
-	write(1, "sb\n", 3);
-}
-//This function performs the move ra or rb where the first element of a stack
-//goes to the last positions
-
-void rotate(t_lst **stack)
-{
-	t_lst *head;
-	t_lst *temp;
-	t_lst *last;
+	t_lst	*head;
+	t_lst	*temp;
+	t_lst	*last;
 
 	if (!stack || ft_lstsize(stack) < 2)
-		return;
+		return ;
 	temp = *stack;
 	head = (*stack)->next;
 	head->prev = NULL;
@@ -65,18 +54,8 @@ void rotate(t_lst **stack)
 	*stack = head;
 }
 
-void	ra(t_lst **stacka)
-{
-	rotate(stacka);
-  write(1, "ra\n", 3);
-}
 
-void	rb(t_lst **stackb)
-{
-	rotate(stackb);
-    write(1, "rb\n", 3);
-}
-//This function performs the move rra or rrb where the last element becomes the first
+// This function performs the move rra or rrb where the last element becomes the first
 void	rev_rotate(t_lst **stack)
 {
 	t_lst	*last;
@@ -91,24 +70,13 @@ void	rev_rotate(t_lst **stack)
 	*stack = last;
 }
 
-void	rra(t_lst **stacka)
-{
-	rev_rotate(stacka);
-	write(1, "rra\n", 4);
-}
-
-void	rrb(t_lst **stackb)
-{
-	rev_rotate(stackb);
-	write(1, "rrb\n", 4);
-}
 
 
-//This function performs the pa or pb move where the first element of a stack is pushed
-//to the other stack
+// This function performs the pa or pb move where the first element of a stack is pushed
+// to the other stack
 void	push(t_lst **push, t_lst **receive)
 {
-	t_lst *node;
+	t_lst	*node;
 
 	if (!*push)
 		return ;
@@ -122,14 +90,3 @@ void	push(t_lst **push, t_lst **receive)
 	*receive = node;
 }
 
-void	pa(t_lst	**stackb, t_lst	**stacka)
-{
-	push(stackb, stacka);
-	write(1, "pa\n", 3);
-}
-
-void	pb(t_lst	**stacka, t_lst	**stackb)
-{
-	push(stacka, stackb);
-	write(1, "pb\n", 3);
-}

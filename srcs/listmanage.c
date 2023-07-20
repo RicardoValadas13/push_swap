@@ -3,17 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   listmanage.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbenjami <rbenjami@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ricardovaladas <ricardovaladas@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 10:32:33 by rbenjami          #+#    #+#             */
-/*   Updated: 2023/07/17 10:23:47 by rbenjami         ###   ########.fr       */
+/*   Updated: 2023/07/20 11:35:37 by ricardovala      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/push_swap.h"
 
-
-//This function creates the head of a stack
+// This function creates the head of a stack
 t_lst	*create_head(int nbr)
 {
 	t_lst	*node;
@@ -32,7 +31,7 @@ t_lst	*create_head(int nbr)
 	return (node);
 }
 
-//This function adds nodes to a stack
+// This function adds nodes to a stack
 void	add_to_stack(t_lst **lst, t_lst *new)
 {
 	t_lst	*current;
@@ -49,12 +48,12 @@ void	add_to_stack(t_lst **lst, t_lst *new)
 	}
 }
 
-//This function returns the size of a stack
+// This function returns the size of a stack
 int	ft_lstsize(t_lst **lst)
 {
 	int		cnt;
 	t_lst	*temp;
-	
+
 	temp = *lst;
 	cnt = 0;
 	if (!temp)
@@ -67,7 +66,7 @@ int	ft_lstsize(t_lst **lst)
 	return (cnt);
 }
 
-//This function returns the last node of the stack
+// This function returns the last node of the stack
 t_lst	*last_in_stack(t_lst *lst)
 {
 	t_lst	*temp;
@@ -80,7 +79,7 @@ t_lst	*last_in_stack(t_lst *lst)
 	return (temp);
 }
 
-//This function deletes a node of a given stack
+// This function deletes a node of a given stack
 void	del_node(t_lst **del)
 {
 	t_lst	*prev_node;

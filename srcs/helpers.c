@@ -3,18 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   helpers.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbenjami <rbenjami@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ricardovaladas <ricardovaladas@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 10:27:54 by rbenjami          #+#    #+#             */
-/*   Updated: 2023/07/17 14:09:48 by rbenjami         ###   ########.fr       */
+/*   Updated: 2023/07/20 11:50:45 by ricardovala      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/push_swap.h"
 
-
-//This function is a reproduction of the atoi function, with this i transform
-//a char  representing a number into to a int
+// This function is a reproduction of the atoi function, with this i transform
+// a char  representing a number into to a int
 int	ft_atoi(char const *nptr)
 {
 	int	signal;
@@ -42,23 +41,7 @@ int	ft_atoi(char const *nptr)
 	return (nbr * signal);
 }
 
-//This function allows me to check the order of a given stack,
-//if return = 1 then its ordered
-int	check_order(t_lst **head)
-{
-	t_lst	*stack;
-
-	stack = *head;
-	while (stack->next != NULL && stack != NULL)
-	{
-		if (stack->content > stack->next->content)
-			return (0);
-		stack = stack->next;
-	}
-	return (1);
-}
-
-//This function checks if the order of a stack is descending
+// This function checks if the order of a stack is descending
 int	descending(t_lst **stack)
 {
 	int		i;
@@ -75,3 +58,22 @@ int	descending(t_lst **stack)
 	return (1);
 }
 
+int	abs_val(int val)
+{
+	if (val < 0)
+		return (-val);
+	return (val);
+}
+
+// This fucntion returns the elements i need to move
+// in stackB
+t_lst	*mv_stackB(t_lst *a, t_lst **b)
+{
+	t_lst	*stack_mv;
+
+	if (a->content > ft_max(*b)->content || a->content < ft_min(*b)->content)
+		stack_mv = ft_max(*b);
+	else
+		stack_mv = ft_maxbelow(b, a->content);
+	return (stack_mv);
+}

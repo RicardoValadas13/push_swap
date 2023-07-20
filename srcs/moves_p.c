@@ -1,31 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   moveshelper.c                                      :+:      :+:    :+:   */
+/*   moves_p.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ricardovaladas <ricardovaladas@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/05 10:58:37 by rbenjami          #+#    #+#             */
-/*   Updated: 2023/07/14 12:20:18 by ricardovala      ###   ########.fr       */
+/*   Created: 2023/07/20 11:41:51 by ricardovala       #+#    #+#             */
+/*   Updated: 2023/07/20 11:42:28 by ricardovala      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/push_swap.h"
 
-void	rr(t_lst **stacka, t_lst **stackb)
+void	pa(t_lst **stackb, t_lst **stacka)
 {
-	ra(stacka);
-	rb(stackb);
+	push(stackb, stacka);
+	write(1, "pa\n", 3);
 }
 
-void	rrr(t_lst **stacka, t_lst **stackb)
+void	pb(t_lst **stacka, t_lst **stackb)
 {
-	rra(stacka);
-	rrb(stackb);
-}
-
-void	ss(t_lst **stacka, t_lst **stackb)
-{
-	sa(stacka);
-	sb(stackb);
+	push(stacka, stackb);
+	write(1, "pb\n", 3);
 }

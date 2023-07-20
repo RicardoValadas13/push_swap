@@ -6,7 +6,7 @@
 /*   By: ricardovaladas <ricardovaladas@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 10:38:01 by rbenjami          #+#    #+#             */
-/*   Updated: 2023/07/18 14:29:16 by ricardovala      ###   ########.fr       */
+/*   Updated: 2023/07/20 11:59:49 by ricardovala      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 int	main(int ac, char **av)
 {
-	int					i;
-	t_lst				*a;
-	t_lst				*b;
+	int		i;
+	t_lst	*a;
+	t_lst	*b;
 
 	a = NULL;
 	b = NULL;
@@ -29,67 +29,40 @@ int	main(int ac, char **av)
 			add_to_stack(&a, create_head(ft_atoi(av[i++])));
 	}
 	if (check_order(&a))
-		ordered() ;
-    else if (check_errors(&a))
-        error();
+		ordered();
+	else if (check_errors(&a))
+		error();
 	else
 		check_sort(&a, &b);
 }
 
-void    error()
+
+void	print_stacks(t_lst *stackA, t_lst *stackB)
 {
-    write(1, "error\n", 6);
+	t_lst	*tempA;
+	t_lst	*tempB;
+
+	tempA = stackA;
+	tempB = stackB;
+	while (tempA != NULL || tempB != NULL)
+	{
+		if (tempA != NULL)
+		{
+			printf("%-8d", tempA->content);
+			tempA = tempA->next;
+		}
+		else
+		{
+			printf("         ");
+		}
+		printf("  |  ");
+		if (tempB != NULL)
+		{
+			printf("%-8d", tempB->content);
+			tempB = tempB->next;
+		}
+		printf("\n");
+	}
+	printf("--------  |  --------\n");
+	printf("Stack A   |  Stack B\n\n\n");
 }
-
-void    ordered()
-{
-    write(1, "ordered\n", 8);
-}
-
-int check_errors(t_lst **a)
-{
-    t_lst   *tmp;
-    t_lst   *tmp1;
-
-    tmp1 = *a;
-    while (tmp1)
-    {
-        tmp = tmp1->next;
-        while (tmp)
-        {
-            if (tmp->content == tmp1->content)
-                return (1);
-            tmp = tmp->next;
-        }
-        tmp1 = tmp1->next;
-    }
-    return (0);
-}
-
-void print_stacks(t_lst *stackA, t_lst *stackB)
-{
-    t_lst *tempA = stackA;
-    t_lst *tempB = stackB;
-
-    while (tempA != NULL || tempB != NULL) {
-        if (tempA != NULL) {
-            printf("%-8d", tempA->content);
-            tempA = tempA->next;
-        } else {
-            printf("         ");
-        }
-
-        printf("  |  ");
-
-        if (tempB != NULL) {
-            printf("%-8d", tempB->content);
-            tempB = tempB->next;
-        }
-
-        printf("\n");
-    }
-
-    printf("--------  |  --------\n");
-    printf("Stack A   |  Stack B\n\n\n");
-}
-
