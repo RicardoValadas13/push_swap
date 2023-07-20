@@ -6,23 +6,28 @@
 /*   By: ricardovaladas <ricardovaladas@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 11:43:30 by ricardovala       #+#    #+#             */
-/*   Updated: 2023/07/20 11:51:06 by ricardovala      ###   ########.fr       */
+/*   Updated: 2023/07/20 23:02:49 by ricardovala      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/push_swap.h"
 
-void	error(void)
+int	check_errors(char *str)
 {
-	write(1, "error\n", 6);
+	if (!str || *str == '\0') 
+        return (1);
+    if (*str == '+' || *str == '-') 
+        str++;
+    while (*str) 
+	{
+        if (!ft_isdigit(*str))
+            return (1);
+        str++;
+    }
+    return (0);
 }
 
-void	ordered(void)
-{
-	write(1, "ordered\n", 8);
-}
-
-int	check_errors(t_lst **a)
+int	check_dbl(t_lst **a)
 {
 	t_lst	*tmp;
 	t_lst	*tmp1;
@@ -49,7 +54,7 @@ int	check_order(t_lst **head)
 	t_lst	*stack;
 
 	stack = *head;
-	while (stack->next != NULL && stack != NULL)
+	while (stack->next != NULL)
 	{
 		if (stack->content > stack->next->content)
 			return (0);

@@ -6,7 +6,7 @@
 /*   By: ricardovaladas <ricardovaladas@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 10:58:44 by rbenjami          #+#    #+#             */
-/*   Updated: 2023/07/20 16:42:29 by ricardovala      ###   ########.fr       */
+/*   Updated: 2023/07/20 22:24:54 by ricardovala      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,7 +169,7 @@ void	check_sort(t_lst **a, t_lst **b)
 		pb(a, b);
 		size = ft_lstsize(a);
 		while (size > 3)
-		{
+		{ 
 			sortingalg(a, b);
 			pb(a, b);
 			size = ft_lstsize(a);
